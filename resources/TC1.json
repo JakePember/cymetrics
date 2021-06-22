@@ -1,7 +1,7 @@
 {
   "tc": "TC1",
-  "avg_duration": "483264",
-  "success_rate": "0.91",
+  "avg_duration": "465397",
+  "success_rate": "0.93",
   "history": {
     "duration": [
       356164,
@@ -14,9 +14,12 @@
       342958,
       594133,
       591506,
-      565426
+      565426,
+      368181,
+      444687,
+      386786
     ],
-    "successful_runs": 10,
+    "successful_runs": 13,
     "failure_runs": 1
   }
 }
