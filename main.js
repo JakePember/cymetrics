@@ -1,75 +1,112 @@
-// const fs = require('fs');
-// const _ = require('lodash');
-//
-// function record_results(new_results) {
-//
-//     function write_results_to_file(data){
-//         fs.writeFileSync(`resources/${data.tc}.json`, JSON.stringify(data, null, 2), err => {
-//             if (err) throw err;
-//
-//             console.log("Done writing"); // Success
-//         });
-//     }
-//
-//     //test case has a history
-//     if(fs.existsSync(`resources/${new_results.tc}.json`)){
-//         const file_buffer_data = fs.readFileSync(`resources/${new_results.tc}.json`);
-//
-//         const average = (array) => array.reduce((a, b) => a + b) / array.length;
-//
-//         const in_file_content = JSON.parse(file_buffer_data);
-//         let mutated_content = _.cloneDeep(in_file_content)
-//
-//         let history_of_duration = in_file_content.history.duration
-//         history_of_duration.push(new_results.duration)
-//
-//
-//         mutated_content.history.duration = history_of_duration
-//         new_results.successful ? mutated_content.history.successful_runs += 1 : mutated_content.history.failure_runs += 1
-//
-//         mutated_content.success_rate = (mutated_content.history.successful_runs / (mutated_content.history.successful_runs + mutated_content.history.failure_runs)).toFixed(2)
-//         mutated_content.avg_duration = (average(mutated_content.history.duration)).toFixed(0)
-//
-//         write_results_to_file(mutated_content)
-//     }
-//
-//     //First test case run
-//     if(fs.existsSync(`resources/${new_results.tc}.json`) === false){
-//         const new_test_data = {
-//             "tc": new_results.tc,
-//             "avg_duration": new_results.duration,
-//             "success_rate": new_results.successful ? 1.00 : 0.00,
-//             "history": {
-//                 "duration": [new_results.duration],
-//                 "successful_runs": new_results.successful ? 1 : 0,
-//                 "failure_runs": new_results.successful ? 0 : 1
-//             }
-//         }
-//         write_results_to_file(new_test_data)
-//     }
-// }
-//
-// function get_random_result(tc) {
-//     return {
-//         tc: tc.toUpperCase(),
-//         duration: Math.floor(Math.random() * (600000 - 300000) ) + 300000,
-//         successful: Math.random() >= 0.1
-//     }
-//
-// }
-//
-// function main() {
-//     // for (let x = 0; x < 10; x++) {
-//     //     let TC_NUM = `TC${Math.floor(Math.random() * (3 - 1)) + 1}`
-//     //     const new_run_results = get_random_result(TC_NUM)
-//     //     console.log(new_run_results)
-//     //
-//     //     record_results(new_run_results)
-//     // }
-//
-//
-// }
-//
-// if (require.main === module) {
-//     main();
-// }
+const fs = require('fs');
+const _ = require('lodash');
+const mochawesomeReport = require("./resources/report.json")
+const s = require("./resources/settings.json")
+
+/*
+* Purpose
+*
+*
+*
+*
+*/
+function write_results_to_file(jsonName, data) {
+  fs.writeFileSync(`output/${s.outputFileName}.json`, JSON.stringify(data, null, 2), err => {
+    if (err) throw err;
+
+    console.log("Done writing"); // Success
+  });
+}
+
+function createTestCaseObj(test) {
+  return {
+    "title": test.title,
+    "avg_duration": test.duration,
+    "success_rate": test.pass ? 1.00 : 0.00,
+    "history": {
+      "duration": [test.duration],
+      "successful_runs": test.pass ? 1 : 0,
+      "failure_runs": test.pass ? 0 : 1
+    }
+  }
+}
+
+function getFirstTimeData() {
+  const maReports = mochawesomeReport.results
+  let data = []
+  for (const report of maReports) {
+    for (const suite of report.suites) {
+      for (const test of suite.tests) {
+        data.push(createTestCaseObj(test))
+      }
+    }
+    return data
+  }
+}
+
+function findHistoryIndex(title, historyLogReport) {
+  const historyReport = require(historyLogReport)
+  for (let x = 0; x < historyReport.length; x++) {
+    if (title === historyReport[x].title) {
+      return x
+    }
+  }
+  return -1
+}
+
+function mergeTestCases(historyReport, titleMatchIndex, test) {
+  const average = (array) => array.reduce((a, b) => a + b) / array.length;
+
+  //history.duration
+  let historyOfDuration = historyReport[titleMatchIndex].history.duration
+  historyOfDuration.push(test.duration)
+  historyReport[titleMatchIndex].history.duration = historyOfDuration
+
+  //history.successful_runs OR history.failure_runs
+  test.pass ? historyReport[titleMatchIndex].history.successful_runs += 1 : historyReport[titleMatchIndex].history.failure_runs += 1
+
+  //success_rate
+  historyReport[titleMatchIndex].success_rate = (historyReport[titleMatchIndex].history.successful_runs / (historyReport[titleMatchIndex].history.successful_runs + historyReport[titleMatchIndex].history.failure_runs)).toFixed(2)
+
+  //avg_duration
+  historyReport[titleMatchIndex].avg_duration = (average(historyReport[titleMatchIndex].history.duration)).toFixed(0)
+
+  return historyReport
+}
+
+function getUpdatedData(relativeHistoryPath) {
+  const maReports = mochawesomeReport.results
+  const historyReport = require(relativeHistoryPath)
+  let mutHistoryReport = historyReport
+
+  for (const report of maReports) {
+    for (const suite of report.suites) {
+      for (const test of suite.tests) {
+        let titleMatchIndex = findHistoryIndex(test.title, relativeHistoryPath)
+
+        //enter only if the test case exists
+        if (titleMatchIndex !== -1) {
+          mutHistoryReport = mergeTestCases(mutHistoryReport, titleMatchIndex, test)
+        } else { //if its a new addition to the project
+          mutHistoryReport.push(createTestCaseObj(test))
+        }
+      }
+    }
+  }
+  return historyReport
+}
+
+function main() {
+  const relOutputFile = `output/${s.outputFileName}.json`
+
+  // Create history file if it doesnt exist
+  if (fs.existsSync(relOutputFile) === false) {
+      write_results_to_file(s.outputFileName, getFirstTimeData())
+  } else {
+      write_results_to_file(s.outputFileName, getUpdatedData(`./${relOutputFile}`))
+  }
+}
+
+if (require.main === module) {
+  main();
+}
