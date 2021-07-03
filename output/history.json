@@ -1,0 +1,26 @@
+[
+  {
+    "title": ".as() - alias a DOM element for later use",
+    "avg_duration": 462,
+    "success_rate": 1,
+    "history": {
+      "duration": [
+        462
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "title": ".as() - alias a route for later use",
+    "avg_duration": 736,
+    "success_rate": 1,
+    "history": {
+      "duration": [
+        736
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  }
+]
