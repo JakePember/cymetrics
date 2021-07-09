@@ -78,8 +78,8 @@ function getFirstTimeData() {
         data.push(createTestCaseObj(test))
       }
     }
-    return data
   }
+  return data
 }
 
 /*
