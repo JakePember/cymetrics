@@ -150,6 +150,15 @@ function findHistoryIndex(title, relativeHistoryPath) {
   return -1
 }
 
+function findFileIndex(file, mutTcDataOutput) {
+  for(let index = 0; index < mutTcDataOutput.length; index++){
+    if(file === mutTcDataOutput[index].file){
+      return index
+    }
+  }
+  return -1;
+}
+
 /*
 * Purpose: Merges new test data with the past test data
 * Arguments:
@@ -173,14 +182,33 @@ function mergeTestCases(historyReport, titleMatchIndex, test) {
   test.pass ? historyReport[titleMatchIndex].history.successful_runs += 1 : historyReport[titleMatchIndex].history.failure_runs += 1
 
   //success_rate
-  historyReport[titleMatchIndex].success_rate = (historyReport[titleMatchIndex].history.successful_runs / (historyReport[titleMatchIndex].history.successful_runs + historyReport[titleMatchIndex].history.failure_runs)).toFixed(2)
+  historyReport[titleMatchIndex].success_rate = parseFloat((historyReport[titleMatchIndex].history.successful_runs / (historyReport[titleMatchIndex].history.successful_runs + historyReport[titleMatchIndex].history.failure_runs)).toFixed(2))
 
   //avg_duration
-  historyReport[titleMatchIndex].avg_duration = (average(historyReport[titleMatchIndex].history.duration)).toFixed(0)
+  historyReport[titleMatchIndex].avg_duration = parseFloat((average(historyReport[titleMatchIndex].history.duration)).toFixed(0))
 
   return historyReport
 }
 
+function mergeFileData(historyReport, fileMatchIndex, newDataPoint){
+  const average = (array) => array.reduce((a, b) => a + b) / array.length;
+
+  //history.duration
+  let historyOfDuration = historyReport[fileMatchIndex].history.avg_duration
+  historyOfDuration.push(newDataPoint.avg_duration)
+  historyReport[fileMatchIndex].history.avg_duration = historyOfDuration
+
+  //history.successful_runs OR history.failure_runs
+  newDataPoint.success_rate ? historyReport[fileMatchIndex].history.successful_runs += 1 : historyReport[fileMatchIndex].history.failure_runs += 1
+
+  //success_rate
+  historyReport[fileMatchIndex].success_rate = parseFloat((historyReport[fileMatchIndex].history.successful_runs / (historyReport[fileMatchIndex].history.successful_runs + historyReport[fileMatchIndex].history.failure_runs)).toFixed(2))
+
+  //avg_duration
+  historyReport[fileMatchIndex].avg_duration = parseFloat((average(historyReport[fileMatchIndex].history.avg_duration)).toFixed(0))
+
+  return historyReport
+}
 /*
 * Purpose: Main process that is called when there is past test case data to fuse with new test case data.
 * Arguments:
@@ -209,6 +237,51 @@ function getTcUpdatedData(relativeHistoryPath) {
   return historyReport
 }
 
+function getFileUpdatedData(_tcReports){
+  const tcReports = require(_tcReports)
+  const fileDataOutput = require("./output/fileDataOutput.json")
+  let mutFileDataOutput = fileDataOutput
+
+  let tmp = tcReports,
+      groupedByFileReport = tmp.reduce((r, a) => {
+        r[a.file] = r[a.file] || [];
+        r[a.file].push(a);
+        return r;
+      }, Object.create(null));
+
+
+  let result
+  let newFileData = []
+  for(fileGrouping in groupedByFileReport){
+    const file = fileGrouping
+    let fileMatchIndex = findFileIndex(file, mutFileDataOutput)
+
+    let avg_duration = 0
+    let allTestsPassed = true
+
+    groupedByFileReport[fileGrouping].forEach((tc) => {
+      avg_duration = avg_duration + tc.avg_duration
+      if(tc.lastRunState === 'failed'){
+        allTestsPassed = false
+      }
+    })
+    result = {
+      file,
+      avg_duration,
+      allTestsPassed
+    }
+
+    if(fileMatchIndex !== -1){
+      mutFileDataOutput = mergeFileData(mutFileDataOutput, fileMatchIndex, createFileObj(result))
+    }else {
+      mutFileDataOutput.push(createFileObj(result))
+    }
+
+  }
+
+  return mutFileDataOutput
+}
+
 
 /*
 * Purpose: The start of the program, determines which major paths to take
@@ -219,13 +292,13 @@ function main() {
   const relTcOutputFile = `output/${s.testCaseOutputFileName}.json`
   const relfileOutputFile = `output/${s.fileOutputFileName}.json`
 
-  // // Create individual testcase data
-  // fs.existsSync(relTcOutputFile) ?
-  //   writeDataToFile(relTcOutputFile, getTcUpdatedData(`./${relTcOutputFile}`))
-  //   : writeDataToFile(relTcOutputFile, getTcFirstTimeData())
+  // Create individual testcase data
+  fs.existsSync(relTcOutputFile) ?
+    writeDataToFile(relTcOutputFile, getTcUpdatedData(`./${relTcOutputFile}`))
+    : writeDataToFile(relTcOutputFile, getTcFirstTimeData())
 
   fs.existsSync(relfileOutputFile) ?
-      writeDataToFile(relfileOutputFile, getTcUpdatedData(`./${relTcOutputFile}`))
+      writeDataToFile(relfileOutputFile, getFileUpdatedData(`./${relTcOutputFile}`))
       : writeDataToFile(relfileOutputFile, getFileFirstTimeData(`./${relTcOutputFile}`))
 
 }
