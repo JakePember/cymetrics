@@ -1,3 +1,5 @@
 {
-  "outputFileName": "history"
+  "testCaseOutputFileName": "tcDataOutput",
+  "fileOutputFileName": "fileDataOutput",
+  "testRunnerCount": "3"
 }

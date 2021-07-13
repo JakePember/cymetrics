@@ -50,15 +50,30 @@ function writeDataToFile(file, data) {
 *    "skipped": false
 *  }
 */
-function createTestCaseObj(test) {
+function createTestCaseObj(file, test) {
   return {
+    "file": file,
     "title": test.title,
     "avg_duration": test.duration,
     "success_rate": test.pass ? 1.00 : 0.00,
+    "lastRunState": test.state,
     "history": {
       "duration": [test.duration],
       "successful_runs": test.pass ? 1 : 0,
       "failure_runs": test.pass ? 0 : 1
+    }
+  }
+}
+
+function createFileObj(data) {
+  return {
+    "file": data.file,
+    "avg_duration": data.avg_duration,
+    "success_rate": data.allTestsPassed ? 1.00 : 0.00,
+    "history": {
+      "avg_duration": [data.avg_duration],
+      "successful_runs": data.allTestsPassed ? 1 : 0,
+      "failure_runs": data.allTestsPassed ? 0 : 1
     }
   }
 }
@@ -69,17 +84,52 @@ function createTestCaseObj(test) {
 * Arguments:
 * Notes:
 */
-function getFirstTimeData() {
-  const maReports = mochawesomeReport.results
+function getTcFirstTimeData() {
+  const maReportsResults = mochawesomeReport.results
   let data = []
-  for (const report of maReports) {
+  for (const report of maReportsResults) {
     for (const suite of report.suites) {
       for (const test of suite.tests) {
-        data.push(createTestCaseObj(test))
+        data.push(createTestCaseObj(report.fullFile, test))
       }
     }
   }
   return data
+}
+
+function getFileFirstTimeData(_tcReports){
+  const tcReports = require(_tcReports)
+
+  let tmp = tcReports,
+      groupedByFileReport = tmp.reduce((r, a) => {
+        r[a.file] = r[a.file] || [];
+        r[a.file].push(a);
+        return r;
+      }, Object.create(null));
+
+
+  let result
+  let newFileData = []
+  for(fileGrouping in groupedByFileReport){
+    const file = fileGrouping
+    let avg_duration = 0
+    let allTestsPassed = true
+
+    groupedByFileReport[fileGrouping].forEach((tc) => {
+      avg_duration = avg_duration + tc.avg_duration
+      if(tc.lastRunState === 'failed'){
+        allTestsPassed = false
+      }
+    })
+    result = {
+      file,
+      avg_duration,
+      allTestsPassed
+    }
+    newFileData.push(createFileObj(result))
+  }
+
+  return newFileData
 }
 
 /*
@@ -111,6 +161,9 @@ function findHistoryIndex(title, relativeHistoryPath) {
 function mergeTestCases(historyReport, titleMatchIndex, test) {
   const average = (array) => array.reduce((a, b) => a + b) / array.length;
 
+  //lastRunState
+  historyReport[titleMatchIndex].lastRunState = test.state
+
   //history.duration
   let historyOfDuration = historyReport[titleMatchIndex].history.duration
   historyOfDuration.push(test.duration)
@@ -134,12 +187,12 @@ function mergeTestCases(historyReport, titleMatchIndex, test) {
 *   @string relativeHistoryPath- relative path to past test case data
 * Notes:
 */
-function getUpdatedData(relativeHistoryPath) {
-  const maReports = mochawesomeReport.results
+function getTcUpdatedData(relativeHistoryPath) {
+  const maReportsResults = mochawesomeReport.results
   const historyReport = require(relativeHistoryPath)
   let mutHistoryReport = historyReport
 
-  for (const report of maReports) {
+  for (const report of maReportsResults) {
     for (const suite of report.suites) {
       for (const test of suite.tests) {
         let titleMatchIndex = findHistoryIndex(test.title, relativeHistoryPath)
@@ -148,7 +201,7 @@ function getUpdatedData(relativeHistoryPath) {
         if (titleMatchIndex !== -1) {
           mutHistoryReport = mergeTestCases(mutHistoryReport, titleMatchIndex, test)
         } else { //if its a new addition to the project
-          mutHistoryReport.push(createTestCaseObj(test))
+          mutHistoryReport.push(createTestCaseObj(report.fullFile, test))
         }
       }
     }
@@ -163,11 +216,18 @@ function getUpdatedData(relativeHistoryPath) {
 * Notes:
 */
 function main() {
-  const relOutputFile = `output/${s.outputFileName}.json`
+  const relTcOutputFile = `output/${s.testCaseOutputFileName}.json`
+  const relfileOutputFile = `output/${s.fileOutputFileName}.json`
 
-  fs.existsSync(relOutputFile) ?
-    writeDataToFile(relOutputFile, getUpdatedData(`./${relOutputFile}`))
-    : writeDataToFile(relOutputFile, getFirstTimeData())
+  // // Create individual testcase data
+  // fs.existsSync(relTcOutputFile) ?
+  //   writeDataToFile(relTcOutputFile, getTcUpdatedData(`./${relTcOutputFile}`))
+  //   : writeDataToFile(relTcOutputFile, getTcFirstTimeData())
+
+  fs.existsSync(relfileOutputFile) ?
+      writeDataToFile(relfileOutputFile, getTcUpdatedData(`./${relTcOutputFile}`))
+      : writeDataToFile(relfileOutputFile, getFileFirstTimeData(`./${relTcOutputFile}`))
+
 }
 
 if (require.main === module) {
