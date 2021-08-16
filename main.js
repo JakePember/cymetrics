@@ -1,5 +1,3 @@
-const fs = require('fs');
-const _ = require('lodash')
 const mochawesomeReport = require("./resources/report.json")
 const s = require("./resources/settings.json")
 const clone = require("./resources/utils/clone")
@@ -36,7 +34,7 @@ function getTcData(tcDataOutputFile) {
 */
 function getFileData(tcDataOutputFile, fileDataOutputFile){
   const tcGroupedByFileReport = group.testCasesByFile(clone.safeClone(tcDataOutputFile))
-  let mData = _.cloneDeep(clone.safeClone(fileDataOutputFile))
+  let mData = clone.safeClone(fileDataOutputFile)
 
   for(fileGrouping in tcGroupedByFileReport){
     mdata = add.fileData(tcGroupedByFileReport, fileGrouping, mData)
