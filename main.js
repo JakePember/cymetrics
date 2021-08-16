@@ -5,62 +5,17 @@ const s = require("./resources/settings.json")
 const clone = require("./resources/utils/clone")
 const add = require("./resources/utils/add")
 const write = require('./resources/utils/write')
-const find = require('./resources/utils/find')
-const create = require('./resources/utils/create')
-const merge = require('./resources/utils/merge')
-
-function findFileIndex(file, mutTcDataOutput) {
-  for(let index = 0; index < mutTcDataOutput.length; index++){
-    if(file === mutTcDataOutput[index].file){
-      return index
-    }
-  }
-  return -1;
-}
-
-function getFileFirstTimeData(_tcReports){
-  const tcReports = require(_tcReports)
-
-  let tmp = tcReports,
-      groupedByFileReport = tmp.reduce((r, a) => {
-        r[a.file] = r[a.file] || [];
-        r[a.file].push(a);
-        return r;
-      }, Object.create(null));
-
-
-  let result
-  let newFileData = []
-  for(fileGrouping in groupedByFileReport){
-    const file = fileGrouping
-    let avg_duration = 0
-    let allTestsPassed = true
-
-    groupedByFileReport[fileGrouping].forEach((tc) => {
-      avg_duration = avg_duration + tc.avg_duration
-      if(tc.lastRunState === 'failed'){
-        allTestsPassed = false
-      }
-    })
-    result = {
-      file,
-      avg_duration,
-      allTestsPassed
-    }
-    newFileData.push(create.fileObj(result))
-  }
-
-  return newFileData
-}
+const group = require('./resources/utils/group')
 
 /*
-* Purpose: Main process that is called when there is past test case data to fuse with new test case data.
+* Purpose: Gets metrics on the test case level and then either creates a file to hold these metrics, or adds to an
+* already existing file of metrics
 * Arguments:
-*   @string relativeHistoryPath- relative path to past test case data
+*   @string tcDataOutputFile- output location where existing or new metrics should be stored
 * Notes:
 */
 function getTcData(tcDataOutputFile) {
-  mData = clone.safeClone(tcDataOutputFile)
+  let mData = clone.safeClone(tcDataOutputFile)
   for (const report of mochawesomeReport.results) {
     for (const suite of report.suites) {
       for (const test of suite.tests) {
@@ -71,46 +26,19 @@ function getTcData(tcDataOutputFile) {
   return mData
 }
 
-function getFileUpdatedData(_tcReports){
-  const tcReports = require(_tcReports)
-  const fileDataOutput = require("./output/fileDataOutput.json")
-  let mData = _.cloneDeep(fileDataOutput)
+/*
+* Purpose: Gets metrics on a file level and then either creates a file to hold these metrics, or adds to an
+* already existing file of metrics
+* Arguments:
+*   @string tcDataOutputFile- location where test case data is located needed to generate file level metrics
+* Notes:
+*/
+function getFileData(tcDataOutputFile, fileDataOutputFile){
+  const tcGroupedByFileReport = group.testCasesByFile(clone.safeClone(tcDataOutputFile))
+  let mData = _.cloneDeep(clone.safeClone(fileDataOutputFile))
 
-  let tmp = tcReports,
-      groupedByFileReport = tmp.reduce((r, a) => {
-        r[a.file] = r[a.file] || [];
-        r[a.file].push(a);
-        return r;
-      }, Object.create(null));
-
-
-  let result
-  let newFileData = []
-  for(fileGrouping in groupedByFileReport){
-    const fileTitle = fileGrouping
-    let fileMatchIndex = findFileIndex(fileTitle, mData)
-
-    let avg_duration = 0
-    let allTestsPassed = true
-
-    groupedByFileReport[fileGrouping].forEach((tc) => {
-      avg_duration = avg_duration + tc.avg_duration
-      if(tc.lastRunState === 'failed'){
-        allTestsPassed = false
-      }
-    })
-    result = {
-      file: fileTitle,
-      avg_duration,
-      allTestsPassed
-    }
-
-    if(fileMatchIndex !== -1){
-      mData = merge.fileData(mData, fileMatchIndex, create.fileObj(result))
-    }else {
-      mData.push(create.fileObj(result))
-    }
-
+  for(fileGrouping in tcGroupedByFileReport){
+    mdata = add.fileData(tcGroupedByFileReport, fileGrouping, mData)
   }
 
   return mData
@@ -126,14 +54,12 @@ function main() {
   const tcDataOutputFile = `output/${s.testCaseOutputFileName}.json`
   const fileDataOutputFile = `output/${s.fileOutputFileName}.json`
 
-
   write.dataToFile(tcDataOutputFile, getTcData(`./${tcDataOutputFile}`))
-
-  fs.existsSync(fileDataOutputFile) ?
-      write.dataToFile(fileDataOutputFile, getFileUpdatedData(`./${tcDataOutputFile}`))
-      : write.dataToFile(fileDataOutputFile, getFileFirstTimeData(`./${tcDataOutputFile}`))
+  write.dataToFile(fileDataOutputFile, getFileData(`./${tcDataOutputFile}`, fileDataOutputFile))
 }
 
 if (require.main === module) {
   main();
 }
+
+module.exports = {balance: main}

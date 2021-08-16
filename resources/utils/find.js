@@ -6,12 +6,15 @@
 *   @string relativeHistoryPath- relative path to past test case data
 * Notes:
 */
-function index(title, report) {
+function index(type, title, report) {
     for (let index = 0; index < report.length; index++) {
-        if (title === report[index].title) {
+        if (type.toUpperCase() === 'TITLE' && title === report[index].title) {
+            return index
+        } else if(type.toUpperCase() === 'FILE' && title === report[index].file){
             return index
         }
     }
     return -1
 }
+
 module.exports = {index}
