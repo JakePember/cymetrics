@@ -1,4 +1,6 @@
 const fs = require('fs');
+const create = require('./create')
+const s = require("../settings.json");
 /*
 * Purpose: Writes JSON data to a file
 * Arguments:
@@ -18,7 +20,7 @@ const fs = require('fs');
 *  }
 */
 function dataToFile(file, data) {
-    fs.writeFileSync(file, JSON.stringify(data, null, 2), err => {
+    fs.writeFileSync(file, JSON.stringify(data, null, 2), { recursive: true }, err => {
         if (err) throw err;
     });
 }

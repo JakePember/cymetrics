@@ -1,3 +1,4 @@
+var fs = require('fs');
 /*
 * Purpose: Takes the large test objects and makes a new object with only the properties that are needed
 * Arguments:
@@ -49,4 +50,11 @@ function fileObj(data) {
         }
     }
 }
-module.exports = {testCaseObj, fileObj}
+
+function directory(directory) {
+
+    if (!fs.existsSync(directory)){
+        fs.mkdirSync(directory, { recursive: true });
+    }
+}
+module.exports = {testCaseObj, fileObj, directory}

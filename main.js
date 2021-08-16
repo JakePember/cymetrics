@@ -6,6 +6,7 @@ const clone = require("./resources/utils/clone")
 const add = require("./resources/utils/add")
 const write = require('./resources/utils/write')
 const group = require('./resources/utils/group')
+const create = require("./create");
 
 /*
 * Purpose: Gets metrics on the test case level and then either creates a file to hold these metrics, or adds to an
@@ -51,8 +52,10 @@ function getFileData(tcDataOutputFile, fileDataOutputFile){
 * Notes:
 */
 function main() {
-  const tcDataOutputFile = `output/${s.testCaseOutputFileName}.json`
-  const fileDataOutputFile = `output/${s.fileOutputFileName}.json`
+  const tcDataOutputFile = `${s.outputDirectory}/${s.testCaseOutputFileName}.json`
+  const fileDataOutputFile = `${s.outputDirectory}/${s.fileOutputFileName}.json`
+
+  create.directory(s.outputDirectory)
 
   write.dataToFile(tcDataOutputFile, getTcData(`./${tcDataOutputFile}`))
   write.dataToFile(fileDataOutputFile, getFileData(`./${tcDataOutputFile}`, fileDataOutputFile))
