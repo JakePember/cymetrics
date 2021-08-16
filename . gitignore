@@ -91,4 +91,5 @@ lerna-debug.log
 Thumbs.db
 
 # Custom
-test-directory/*
+test-directory/
+output/*
