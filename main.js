@@ -4,7 +4,7 @@ const clone = require("./resources/utils/clone")
 const add = require("./resources/utils/add")
 const write = require('./resources/utils/write')
 const group = require('./resources/utils/group')
-const create = require("./create");
+const create = require("./resources/utils/create");
 
 /*
 * Purpose: Gets metrics on the test case level and then either creates a file to hold these metrics, or adds to an
