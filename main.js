@@ -1,11 +1,8 @@
-const mochawesomeReport = require("./resources/report.json")
-const s = require("./resources/settings.json")
 const clone = require("./resources/utils/clone")
 const add = require("./resources/utils/add")
 const write = require('./resources/utils/write')
 const group = require('./resources/utils/group')
 const create = require("./resources/utils/create");
-
 /*
 * Purpose: Gets metrics on the test case level and then either creates a file to hold these metrics, or adds to an
 * already existing file of metrics
@@ -14,6 +11,9 @@ const create = require("./resources/utils/create");
 * Notes:
 */
 function getTcData(tcDataOutputFile) {
+  const cySettings = clone.safeClone('/cypress.json')
+  const mochawesomeReport = clone.safeClone(cySettings.load_balancer.mochawesomeReport)
+
   let mData = clone.safeClone(tcDataOutputFile)
   for (const report of mochawesomeReport.results) {
     for (const suite of report.suites) {
@@ -50,10 +50,12 @@ function getFileData(tcDataOutputFile, fileDataOutputFile){
 * Notes:
 */
 function main() {
-  const tcDataOutputFile = `${s.outputDirectory}/${s.testCaseOutputFileName}.json`
-  const fileDataOutputFile = `${s.outputDirectory}/${s.fileOutputFileName}.json`
+  const cySettings = clone.safeClone('/cypress.json')
 
-  create.directory(s.outputDirectory)
+  const tcDataOutputFile = `${cySettings.load_balancer.outputDirectory}/${cySettings.load_balancer.testCaseOutputFileName}.json`
+  const fileDataOutputFile = `${cySettings.load_balancer.outputDirectory}/${cySettings.load_balancer.fileOutputFileName}.json`
+
+  create.directory(cySettings.load_balancer.outputDirectory)
 
   write.dataToFile(tcDataOutputFile, getTcData(`./${tcDataOutputFile}`))
   write.dataToFile(fileDataOutputFile, getFileData(`./${tcDataOutputFile}`, fileDataOutputFile))

@@ -1,6 +1,6 @@
 const fs = require('fs');
 var path = require('path');
-var appDir = path.dirname(require.main.filename);
+const appDir = path.dirname(require.main.filename);
 const _ = require('lodash')
 
 function safeClone(dataFile){

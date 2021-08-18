@@ -1,4 +1,7 @@
-var fs = require('fs');
+const fs = require('fs');
+const path = require('path');
+
+const appDir = path.dirname(require.main.filename);
 /*
 * Purpose: Takes the large test objects and makes a new object with only the properties that are needed
 * Arguments:
@@ -52,9 +55,8 @@ function fileObj(data) {
 }
 
 function directory(directory) {
-
-    if (!fs.existsSync(directory)){
-        fs.mkdirSync(directory, { recursive: true });
+    if (!fs.existsSync(`${appDir}/${directory}`)){
+        fs.mkdirSync(`${appDir}/${directory}`, { recursive: true });
     }
 }
 module.exports = {testCaseObj, fileObj, directory}

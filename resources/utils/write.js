@@ -1,6 +1,9 @@
 const fs = require('fs');
-const create = require('./create')
-const s = require("../settings.json");
+const path = require('path');
+
+const appDir = path.dirname(require.main.filename);
+// const outDir = clone.safeClone('/cypress.json').load_balancer.outputDirectory
+
 /*
 * Purpose: Writes JSON data to a file
 * Arguments:
@@ -20,7 +23,7 @@ const s = require("../settings.json");
 *  }
 */
 function dataToFile(file, data) {
-    fs.writeFileSync(file, JSON.stringify(data, null, 2), { recursive: true }, err => {
+    fs.writeFileSync(`${appDir}/${file}`, JSON.stringify(data, null, 2), { recursive: true }, err => {
         if (err) throw err;
     });
 }
