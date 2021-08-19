@@ -1,7 +1,4 @@
 const fs = require('fs');
-const path = require('path');
-
-const appDir = path.dirname(require.main.filename);
 // const outDir = clone.safeClone('/cypress.json').load_balancer.outputDirectory
 
 /*
@@ -22,7 +19,8 @@ const appDir = path.dirname(require.main.filename);
 *    }
 *  }
 */
-function dataToFile(file, data) {
+function dataToFile(file, data, config) {
+    const appDir = config.config.projectRoot
     fs.writeFileSync(`${appDir}/${file}`, JSON.stringify(data, null, 2), { recursive: true }, err => {
         if (err) throw err;
     });

@@ -1,9 +1,8 @@
 const fs = require('fs');
-var path = require('path');
-const appDir = path.dirname(require.main.filename);
 const _ = require('lodash')
 
-function safeClone(dataFile){
+function safeClone(dataFile, config){
+    const appDir = config.config.projectRoot
     let mutatedTcDataReport
     if(fs.existsSync(`${appDir}/${dataFile}`)){
         const tcDataReport = require(`${appDir}/${dataFile}`)

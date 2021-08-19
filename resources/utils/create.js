@@ -1,7 +1,4 @@
 const fs = require('fs');
-const path = require('path');
-
-const appDir = path.dirname(require.main.filename);
 /*
 * Purpose: Takes the large test objects and makes a new object with only the properties that are needed
 * Arguments:
@@ -54,7 +51,8 @@ function fileObj(data) {
     }
 }
 
-function directory(directory) {
+function directory(directory, config) {
+    const appDir = config.config.projectRoot
     if (!fs.existsSync(`${appDir}/${directory}`)){
         fs.mkdirSync(`${appDir}/${directory}`, { recursive: true });
     }
