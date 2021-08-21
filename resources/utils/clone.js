@@ -8,6 +8,7 @@ function safeClone(dataFile, config){
         const tcDataReport = require(`${appDir}/${dataFile}`)
         mutatedTcDataReport = _.cloneDeep(tcDataReport)
     } else {
+        console.log(`INFO - File does not exist: ${appDir}/${dataFile}`)
         mutatedTcDataReport = []
     }
     return mutatedTcDataReport

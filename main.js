@@ -74,25 +74,40 @@ async function main(config) {
   const checkTime = 1000;
   const fs = require('fs');
 
-  function check() {
-    setTimeout(() => {
-      fs.readFile(`${config.config.projectRoot}/${lbSettings.mochawesomeReport}`, 'utf8', function(err, data) {
-        if (err) {
-          // got error reading the file, call check() again
-          check();
-        } else {
-          // we have the file contents here, so do something with it
-          // can delete the source file too
-        }
-      });
-    }, checkTime)
-  }
-
-  check();
+  // function check() {
+  //   setTimeout(() => {
+  //     fs.readFile(`${config.config.projectRoot}/${lbSettings.mochawesomeReport}`, 'utf8', function(err, data) {
+  //       if (err) {
+  //         // got error reading the file, call check() again
+  //         check();
+  //       } else {
+  //         // we have the file contents here, so do something with it
+  //         // can delete the source file too
+  //       }
+  //     });
+  //   }, checkTime)
+  // }
+  //
+  // check();
 
   create.directory(lbSettings.outputDirectory, config)
   write.dataToFile(tcDataOutputFile, getTcData(`./${tcDataOutputFile}`, config), config)
   write.dataToFile(fileDataOutputFile, getFileData(`./${tcDataOutputFile}`, fileDataOutputFile, config), config)
 }
 
+if (require.main === module) {
+  const config = {
+    "config": {
+      "projectRoot": "/Users/jacobbles/IdeaProjects/load_balancer",
+      "load_balancer": {
+        "outputDirectory": "resources/testing/output",
+        "testCaseOutputFileName": "tcDataOutput",
+        "fileOutputFileName": "fileDataOutput",
+        "testRunnerCount": "3",
+        "mochawesomeReport": "resources/testing/mochawesomeMerged.json"
+      }
+    }
+  }
+  main(config);
+}
 module.exports = {balance: main}

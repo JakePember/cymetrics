@@ -1,0 +1,201 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-08-19T16:14:08.574Z",
+    "end": "2021-08-19T16:14:16.589Z",
+    "duration": 5837,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1492ad76-9b04-4d55-9664-b60b6a48f23e",
+      "title": "",
+      "fullFile": "cypress/integration/custom_examples/test_2.spec.js",
+      "file": "cypress/integration/custom_examples/test_2.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6156261a-9bb7-4602-852c-38d6236d9eb2",
+          "title": "suite number 2",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "suite2 test1",
+              "fullTitle": "suite number 2 suite2 test1",
+              "timedOut": null,
+              "duration": 2780,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(Math.floor(Math.random() * 3000) + 1000);",
+              "err": {},
+              "uuid": "64a2b063-9638-4623-a21f-a662b6323ba7",
+              "parentUUID": "6156261a-9bb7-4602-852c-38d6236d9eb2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "suite2 test2",
+              "fullTitle": "suite number 2 suite2 test2",
+              "timedOut": null,
+              "duration": 2794,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(Math.floor(Math.random() * 3000) + 1000);",
+              "err": {},
+              "uuid": "5f791c2a-2054-4d97-a182-7eb393eccecd",
+              "parentUUID": "6156261a-9bb7-4602-852c-38d6236d9eb2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "64a2b063-9638-4623-a21f-a662b6323ba7",
+            "5f791c2a-2054-4d97-a182-7eb393eccecd"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5574,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "0c5cad23-bcaf-420e-ba02-ca3ae13ad5d5",
+      "title": "",
+      "fullFile": "cypress/integration/custom_examples/test_1.spec.js",
+      "file": "cypress/integration/custom_examples/test_1.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "83d34ebc-3126-4eb5-bc05-d8949f7a3943",
+          "title": "suite number 1",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "suite1 test1",
+              "fullTitle": "suite number 1 suite1 test1",
+              "timedOut": null,
+              "duration": 187,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(Math.floor(Math.random() * 1000) + 1);",
+              "err": {},
+              "uuid": "c2be88c1-6fbb-4542-8fe2-8c38f89ba518",
+              "parentUUID": "83d34ebc-3126-4eb5-bc05-d8949f7a3943",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "suite1 test2",
+              "fullTitle": "suite number 1 suite1 test2",
+              "timedOut": null,
+              "duration": 76,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(Math.floor(Math.random() * 1000) + 1);",
+              "err": {},
+              "uuid": "b23779b2-583b-44cb-b380-5265462019ac",
+              "parentUUID": "83d34ebc-3126-4eb5-bc05-d8949f7a3943",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c2be88c1-6fbb-4542-8fe2-8c38f89ba518",
+            "b23779b2-583b-44cb-b380-5265462019ac"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 263,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/testCaseResults",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}
