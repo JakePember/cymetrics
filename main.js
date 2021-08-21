@@ -5,10 +5,39 @@ const group = require('./resources/utils/group')
 const create = require("./resources/utils/create");
 const path = require("path");
 const fs = require("fs");
+
 function sleep(ms) {
-  console.log('IN THE SLEEP')
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
+  });
+}
+
+
+function checkExistsWithTimeout(filePath, timeout) {
+  return new Promise(function (resolve, reject) {
+
+    var timer = setTimeout(function () {
+      watcher.close();
+      reject(new Error('File did not exists and was not created during the timeout.'));
+    }, timeout);
+
+    fs.access(filePath, fs.constants.R_OK, async (err) => {
+      if (!err) {
+        clearTimeout(timer);
+        watcher.close();
+        resolve();
+      }
+    });
+
+    var dir = path.dirname(filePath);
+    var basename = path.basename(filePath);
+    var watcher = fs.watch(dir, function (eventType, filename) {
+      if (eventType === 'rename' && filename === basename) {
+        clearTimeout(timer);
+        watcher.close();
+        resolve();
+      }
+    });
   });
 }
 /*
@@ -60,35 +89,12 @@ function getFileData(tcDataOutputFile, fileDataOutputFile, config){
 * Notes:
 */
 async function main(config) {
-  // console.log('BEFORE SLEEP');
-  // var waitTill = new Date(new Date().getTime() + seconds * 1000);
-  // while(waitTill > new Date()){}
-  // console.log('AFTER SLEEP');
-
-
   const lbSettings = config.config.load_balancer
   const tcDataOutputFile = `${lbSettings.outputDirectory}/${lbSettings.testCaseOutputFileName}.json`
   const fileDataOutputFile = `${lbSettings.outputDirectory}/${lbSettings.fileOutputFileName}.json`
 
-
-  const checkTime = 1000;
-  const fs = require('fs');
-
-  // function check() {
-  //   setTimeout(() => {
-  //     fs.readFile(`${config.config.projectRoot}/${lbSettings.mochawesomeReport}`, 'utf8', function(err, data) {
-  //       if (err) {
-  //         // got error reading the file, call check() again
-  //         check();
-  //       } else {
-  //         // we have the file contents here, so do something with it
-  //         // can delete the source file too
-  //       }
-  //     });
-  //   }, checkTime)
-  // }
-  //
-  // check();
+  await checkExistsWithTimeout(`${config.config.projectRoot}/${lbSettings.mochawesomeReport}`, 10000)
+  await sleep(1000) //file isn't done waiting, give it a few seconds to make sure its usable
 
   create.directory(lbSettings.outputDirectory, config)
   write.dataToFile(tcDataOutputFile, getTcData(`./${tcDataOutputFile}`, config), config)
@@ -98,7 +104,7 @@ async function main(config) {
 if (require.main === module) {
   const config = {
     "config": {
-      "projectRoot": "/Users/jacobbles/IdeaProjects/load_balancer",
+      "projectRoot": path.dirname(require.main.filename),
       "load_balancer": {
         "outputDirectory": "resources/testing/output",
         "testCaseOutputFileName": "tcDataOutput",
