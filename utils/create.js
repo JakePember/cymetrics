@@ -51,10 +51,9 @@ function fileObj(data) {
     }
 }
 
-function directory(directory, config) {
-    const appDir = config.config.projectRoot
-    if (!fs.existsSync(`${appDir}/${directory}`)){
-        fs.mkdirSync(`${appDir}/${directory}`, { recursive: true });
+function directory(directory) {
+    if (!fs.existsSync(directory)){
+        fs.mkdirSync(directory, { recursive: true });
     }
 }
 module.exports = {testCaseObj, fileObj, directory}

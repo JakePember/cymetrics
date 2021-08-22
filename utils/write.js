@@ -19,9 +19,8 @@ const fs = require('fs');
 *    }
 *  }
 */
-function dataToFile(file, data, config) {
-    const appDir = config.config.projectRoot
-    fs.writeFileSync(`${appDir}/${file}`, JSON.stringify(data, null, 2), { recursive: true }, err => {
+function dataToFile(file, data) {
+    fs.writeFileSync(file, JSON.stringify(data, null, 2), { recursive: true }, err => {
         if (err) throw err;
     });
 }
