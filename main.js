@@ -71,8 +71,8 @@ function getTcData(tcDataOutputFile, config) {
 *   @string tcDataOutputFile- location where test case data is located needed to generate file level metrics
 * Notes:
 */
-function getFileData(tcDataOutputFile, fileDataOutputFile, config){
-  const tcGroupedByFileReport = group.testCasesByFile(clone.safeClone(tcDataOutputFile, config))
+function getFileData(tcData, fileDataOutputFile, config){
+  const tcGroupedByFileReport = group.testCasesByFile(tcData)
   let mData = clone.safeClone(fileDataOutputFile, config)
 
   for(fileGrouping in tcGroupedByFileReport){
@@ -93,12 +93,19 @@ async function main(config) {
   const tcDataOutputFile = `${lbSettings.outputDirectory}/${lbSettings.testCaseOutputFileName}.json`
   const fileDataOutputFile = `${lbSettings.outputDirectory}/${lbSettings.fileOutputFileName}.json`
 
+  //wait for mochawesome report to finish generating
   await checkExistsWithTimeout(`${config.config.projectRoot}/${lbSettings.mochawesomeReport}`, 10000)
-  await sleep(1000) //file isn't done waiting, give it a few seconds to make sure its usable
+  await sleep(2000) //file isn't done waiting, give it a few seconds to make sure its usable
 
-  create.directory(lbSettings.outputDirectory, config)
-  write.dataToFile(tcDataOutputFile, getTcData(`./${tcDataOutputFile}`, config), config)
-  write.dataToFile(fileDataOutputFile, getFileData(`./${tcDataOutputFile}`, fileDataOutputFile, config), config)
+  await create.directory(lbSettings.outputDirectory, config)
+
+  //gather data
+  const tcData = getTcData(`./${tcDataOutputFile}`, config)
+  const fileData = getFileData(tcData, fileDataOutputFile, config)
+
+  //write data
+  await write.dataToFile(tcDataOutputFile, tcData, config)
+  await write.dataToFile(fileDataOutputFile, fileData, config)
 }
 
 if (require.main === module) {
