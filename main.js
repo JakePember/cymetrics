@@ -1,68 +1,52 @@
-const clone = require("./resources/utils/clone")
-const add = require("./resources/utils/add")
-const write = require('./resources/utils/write')
-const group = require('./resources/utils/group')
-const create = require("./resources/utils/create");
-/*
-* Purpose: Gets metrics on the test case level and then either creates a file to hold these metrics, or adds to an
-* already existing file of metrics
-* Arguments:
-*   @string tcDataOutputFile- output location where existing or new metrics should be stored
-* Notes:
-*/
-function getTcData(tcDataOutputFile) {
-  const cySettings = clone.safeClone('/cypress.json')
-  const mochawesomeReport = clone.safeClone(cySettings.load_balancer.mochawesomeReport)
+const clone = require("./utils/clone")
+const write = require('./utils/write')
+const create = require("./utils/create");
+const sleep = require("./utils/sleep")
+const check = require("./utils/check");
 
-  let mData = clone.safeClone(tcDataOutputFile)
-  for (const report of mochawesomeReport.results) {
-    for (const suite of report.suites) {
-      for (const test of suite.tests) {
-        mData = add.testData(report.fullFile, test, mData)
-      }
-    }
-  }
-  return mData
-}
-
-/*
-* Purpose: Gets metrics on a file level and then either creates a file to hold these metrics, or adds to an
-* already existing file of metrics
-* Arguments:
-*   @string tcDataOutputFile- location where test case data is located needed to generate file level metrics
-* Notes:
-*/
-function getFileData(tcDataOutputFile, fileDataOutputFile){
-  const tcGroupedByFileReport = group.testCasesByFile(clone.safeClone(tcDataOutputFile))
-  let mData = clone.safeClone(fileDataOutputFile)
-
-  for(fileGrouping in tcGroupedByFileReport){
-    mdata = add.fileData(tcGroupedByFileReport, fileGrouping, mData)
-  }
-
-  return mData
-}
-
-
+const {getTcData} = require('./functions/getTcData')
+const {getFileData} = require("./functions/getFileData");
 /*
 * Purpose: The start of the program, determines which major paths to take
 * Arguments:
 * Notes:
 */
-function main() {
-  const cySettings = clone.safeClone('/cypress.json')
+async function main(allConfig) {
+  const {
+    outputDirectory,
+    testCaseOutputFileName,
+    fileOutputFileName,
+    mochawesomeReport
+  } = allConfig.config.load_balancer
+  const projectRoot = allConfig.config.projectRoot
 
-  const tcDataOutputFile = `${cySettings.load_balancer.outputDirectory}/${cySettings.load_balancer.testCaseOutputFileName}.json`
-  const fileDataOutputFile = `${cySettings.load_balancer.outputDirectory}/${cySettings.load_balancer.fileOutputFileName}.json`
+  const absMochaReportFile = `${projectRoot}/${mochawesomeReport}`
+  const absTcLevelOutFile = `${projectRoot}/${outputDirectory}/${testCaseOutputFileName}.json`
+  const absFileLevelOutFile = `${projectRoot}/${outputDirectory}/${fileOutputFileName}.json`
+  const absOutputDir = `${projectRoot}/${outputDirectory}`
 
-  create.directory(cySettings.load_balancer.outputDirectory)
+  //wait for mochawesome report to finish generating
+  await check.fileExistenceWithTimeout(absMochaReportFile, 10000)
+  await sleep.sleep(2000) //file isn't done waiting, give it a few seconds to make sure its usable
 
-  write.dataToFile(tcDataOutputFile, getTcData(`./${tcDataOutputFile}`))
-  write.dataToFile(fileDataOutputFile, getFileData(`./${tcDataOutputFile}`, fileDataOutputFile))
+  await create.directory(absOutputDir)
+
+  //gather data
+  const mochaData = clone.safeClone(absMochaReportFile)
+  const currTcData = clone.safeClone(absTcLevelOutFile)
+  const currFileData = clone.safeClone(absFileLevelOutFile)
+
+  const updatedTcData = getTcData(currTcData, mochaData)
+  const updatedFileData = getFileData(updatedTcData, currFileData)
+
+  //write data
+  await write.dataToFile(absTcLevelOutFile, updatedTcData)
+  await write.dataToFile(absFileLevelOutFile, updatedFileData)
 }
 
 if (require.main === module) {
-  main();
-}
+  const config = require('./resources/testing/config')
 
+  main(config);
+}
 module.exports = {balance: main}
