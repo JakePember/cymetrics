@@ -1,4 +1,3 @@
-const find = require('./find')
 /*
 * Purpose: Merges new test data with the past test data
 * Arguments:

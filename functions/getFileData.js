@@ -1,5 +1,5 @@
 const add = require("../utils/add");
-const group = require("../utils/group");
+const group = require("../resources/utils/group");
 /*
 * Purpose: Gets metrics on a file level and then either creates a file to hold these metrics, or adds to an
 * already existing file of metrics

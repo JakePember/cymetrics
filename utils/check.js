@@ -9,7 +9,7 @@ const path = require("path");
 function fileExistenceWithTimeout(filePath, timeout) {
     return new Promise(function (resolve, reject) {
 
-        var timer = setTimeout(function () {
+        let timer = setTimeout(function () {
             watcher.close();
             reject(new Error(`File not found: ${filePath}`));
         }, timeout);
