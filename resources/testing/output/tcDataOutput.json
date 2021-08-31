@@ -1,0 +1,342 @@
+[
+  {
+    "file": "cypress/integration/custom_examples/test_10.spec.js",
+    "title": "suite10 test1",
+    "avg_duration": 2462,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        2462
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_10.spec.js",
+    "title": "suite10 test2",
+    "avg_duration": 2184,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        2184
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_2.spec.js",
+    "title": "suite2 test1",
+    "avg_duration": 2721,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        1843,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780
+      ],
+      "successful_runs": 16,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_2.spec.js",
+    "title": "suite2 test2",
+    "avg_duration": 2728,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        1730,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794
+      ],
+      "successful_runs": 16,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_3.spec.js",
+    "title": "suite3 test1",
+    "avg_duration": 1412,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        1412
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_3.spec.js",
+    "title": "suite3 test2",
+    "avg_duration": 2464,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        2464
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_4.spec.js",
+    "title": "suite4 test1",
+    "avg_duration": 4332,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        4332
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_4.spec.js",
+    "title": "suite4 test2",
+    "avg_duration": 4755,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        4755
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_5.spec.js",
+    "title": "suite5 test1",
+    "avg_duration": 1402,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        1402
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_5.spec.js",
+    "title": "suite5 test2",
+    "avg_duration": 2537,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        2537
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_6.spec.js",
+    "title": "suite6 test1",
+    "avg_duration": 6313,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        6313
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_6.spec.js",
+    "title": "suite6 test2",
+    "avg_duration": 2563,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        2563
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_7.spec.js",
+    "title": "suite7 test1",
+    "avg_duration": 7453,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        7453
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_7.spec.js",
+    "title": "suite7 test2",
+    "avg_duration": 5612,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        5612
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_8.spec.js",
+    "title": "suite8 test1",
+    "avg_duration": 8343,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        8343
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_8.spec.js",
+    "title": "suite8 test2",
+    "avg_duration": 8707,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        8707
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_9.spec.js",
+    "title": "suite9 test1",
+    "avg_duration": 4128,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        4128
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_9.spec.js",
+    "title": "suite9 test2",
+    "avg_duration": 7772,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        7772
+      ],
+      "successful_runs": 1,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_1.spec.js",
+    "title": "suite1 test1",
+    "avg_duration": 185,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        158,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187
+      ],
+      "successful_runs": 16,
+      "failure_runs": 0
+    }
+  },
+  {
+    "file": "cypress/integration/custom_examples/test_1.spec.js",
+    "title": "suite1 test2",
+    "avg_duration": 80,
+    "success_rate": 1,
+    "lastRunState": "passed",
+    "history": {
+      "duration": [
+        136,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76
+      ],
+      "successful_runs": 16,
+      "failure_runs": 0
+    }
+  }
+]

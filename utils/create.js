@@ -38,6 +38,12 @@ function testCaseObj(file, test) {
     }
 }
 
+/*
+* Purpose: Takes a test case object that has been groupped by its parent file and creates the file level object
+* Arguments:
+*   @object data - test case object that has been grouped by its parent
+* Notes:
+*/
 function fileObj(data) {
     return {
         "file": data.file,
@@ -51,6 +57,12 @@ function fileObj(data) {
     }
 }
 
+/*
+* Purpose: Creates a any directory in the directory variable that doesn't exist
+* Arguments:
+*   @object data - the path of the directory
+* Notes:
+*/
 function directory(directory) {
     if (!fs.existsSync(directory)){
         fs.mkdirSync(directory, { recursive: true });
