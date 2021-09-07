@@ -8,6 +8,7 @@ module.exports = {
             "testCaseOutputFileName": "tcDataOutput",
             "fileOutputFileName": "fileDataOutput",
             "balancedFilesOutputFileName": "balancedFiles",
+            "balancedTcOutputFileName": "balancedTestCases",
             "testRunnerCount": "3",
             "mochawesomeReport": "resources/testing/mochawesomeMerged.json"
         }

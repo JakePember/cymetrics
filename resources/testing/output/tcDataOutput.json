@@ -30,7 +30,7 @@
   {
     "file": "cypress/integration/custom_examples/test_2.spec.js",
     "title": "suite2 test1",
-    "avg_duration": 2721,
+    "avg_duration": 2744,
     "success_rate": 1,
     "lastRunState": "passed",
     "history": {
@@ -50,16 +50,26 @@
         2780,
         2780,
         2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
+        2780,
         2780
       ],
-      "successful_runs": 16,
+      "successful_runs": 26,
       "failure_runs": 0
     }
   },
   {
     "file": "cypress/integration/custom_examples/test_2.spec.js",
     "title": "suite2 test2",
-    "avg_duration": 2728,
+    "avg_duration": 2753,
     "success_rate": 1,
     "lastRunState": "passed",
     "history": {
@@ -79,9 +89,19 @@
         2794,
         2794,
         2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
+        2794,
         2794
       ],
-      "successful_runs": 16,
+      "successful_runs": 26,
       "failure_runs": 0
     }
   },
@@ -284,7 +304,7 @@
   {
     "file": "cypress/integration/custom_examples/test_1.spec.js",
     "title": "suite1 test1",
-    "avg_duration": 185,
+    "avg_duration": 186,
     "success_rate": 1,
     "lastRunState": "passed",
     "history": {
@@ -304,16 +324,26 @@
         187,
         187,
         187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
+        187,
         187
       ],
-      "successful_runs": 16,
+      "successful_runs": 26,
       "failure_runs": 0
     }
   },
   {
     "file": "cypress/integration/custom_examples/test_1.spec.js",
     "title": "suite1 test2",
-    "avg_duration": 80,
+    "avg_duration": 78,
     "success_rate": 1,
     "lastRunState": "passed",
     "history": {
@@ -333,9 +363,19 @@
         76,
         76,
         76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
         76
       ],
-      "successful_runs": 16,
+      "successful_runs": 26,
       "failure_runs": 0
     }
   }

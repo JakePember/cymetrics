@@ -15,6 +15,7 @@ async function config(CypressConfig) {
     testCaseOutputFileName,
     fileOutputFileName,
     balancedFilesOutputFileName,
+    balancedTcOutputFileName,
     testRunnerCount,
     mochawesomeReport
   } = CypressConfig.config.load_balancer
@@ -41,10 +42,11 @@ async function config(CypressConfig) {
       "absolute": {
         "fileLevel": {
           "fileOutputFile": `${absOutputDir}/${fileOutputFileName}.json`,
-          "balancedOutputFile": `${absOutputDir}/${balancedFilesOutputFileName}.json`
+          "balancedFileOutputFile": `${absOutputDir}/${balancedFilesOutputFileName}.json`
         },
         "testCaseLevel": {
-          "caseOutputFile": `${absOutputDir}/${testCaseOutputFileName}.json`
+          "caseOutputFile": `${absOutputDir}/${testCaseOutputFileName}.json`,
+          "balancedTcOutputFile": `${absOutputDir}/${balancedTcOutputFileName}.json`
         },
         "mochaReport": `${projectRoot}/${mochawesomeReport}`
       }

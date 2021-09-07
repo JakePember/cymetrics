@@ -1,5 +1,5 @@
-const {initRunners} = require("./initRunners")
-const {divvyData} = require("./divvyData");
+const {initFileRunners} = require("./initFileRunners")
+const {divvyFileData} = require("./divvyFileData");
 const sort = require("../../utils/sort");
 
 
@@ -13,12 +13,12 @@ const sort = require("../../utils/sort");
 */
 function getBalancedFileData(data, amtOfRunners) {
     let _data = sort.byAvgDur(data) //Sort the data before anything else
-    let runners = initRunners(_data, amtOfRunners) //add one data point to each runner
+    let runners = initFileRunners(_data, amtOfRunners) //add one data point to each runner
 
-    //delete the data points used by the initRunners function, they are now used
+    //delete the data points used by the initFileRunners function, they are now used
     _data.splice(0, amtOfRunners)
 
-    runners = divvyData(runners, _data) //distribute the rest of the data points to the test runners
+    runners = divvyFileData(runners, _data) //distribute the rest of the data points to the test runners
 
     return runners
 }
