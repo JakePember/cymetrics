@@ -30,15 +30,16 @@
         4646,
         4646,
         4646,
+        4646,
         4646
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
   {
     "file": "cypress/integration/custom_examples/test_2.spec.js",
-    "avg_duration": 5277,
+    "avg_duration": 5286,
     "success_rate": 1,
     "history": {
       "avg_duration": [
@@ -67,9 +68,10 @@
         5487,
         5491,
         5494,
-        5497
+        5497,
+        5500
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -104,9 +106,10 @@
         3876,
         3876,
         3876,
+        3876,
         3876
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -141,9 +144,10 @@
         9087,
         9087,
         9087,
+        9087,
         9087
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -178,9 +182,10 @@
         3939,
         3939,
         3939,
+        3939,
         3939
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -215,9 +220,10 @@
         8876,
         8876,
         8876,
+        8876,
         8876
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -252,9 +258,10 @@
         13065,
         13065,
         13065,
+        13065,
         13065
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -289,9 +296,10 @@
         17050,
         17050,
         17050,
+        17050,
         17050
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -326,9 +334,10 @@
         11900,
         11900,
         11900,
+        11900,
         11900
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -363,9 +372,10 @@
         265,
         265,
         264,
+        264,
         264
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   }

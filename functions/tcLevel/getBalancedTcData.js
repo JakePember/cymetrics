@@ -7,6 +7,8 @@
 * Notes:
 */
 const sort = require("../../utils/sort");
+const {initTcRunners} = require("../fileLevel/initFileRunners");
+const {divvyTcData} = require("../fileLevel/divvyFileData");
 
 function getBalancedTcData(data, amtOfRunners) {
     let _data = sort.byAvgDur(data) //Sort the data before anything else

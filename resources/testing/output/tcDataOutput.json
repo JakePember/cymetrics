@@ -30,7 +30,7 @@
   {
     "file": "cypress/integration/custom_examples/test_2.spec.js",
     "title": "suite2 test1",
-    "avg_duration": 2744,
+    "avg_duration": 2745,
     "success_rate": 1,
     "lastRunState": "passed",
     "history": {
@@ -60,16 +60,17 @@
         2780,
         2780,
         2780,
+        2780,
         2780
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
   {
     "file": "cypress/integration/custom_examples/test_2.spec.js",
     "title": "suite2 test2",
-    "avg_duration": 2753,
+    "avg_duration": 2755,
     "success_rate": 1,
     "lastRunState": "passed",
     "history": {
@@ -99,9 +100,10 @@
         2794,
         2794,
         2794,
+        2794,
         2794
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -334,9 +336,10 @@
         187,
         187,
         187,
+        187,
         187
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   },
@@ -373,9 +376,10 @@
         76,
         76,
         76,
+        76,
         76
       ],
-      "successful_runs": 26,
+      "successful_runs": 27,
       "failure_runs": 0
     }
   }
