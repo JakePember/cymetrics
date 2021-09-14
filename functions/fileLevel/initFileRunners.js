@@ -7,6 +7,9 @@
 */
 function initFileRunners (data, amtOfRunners){
     let results = {}
+    if(data.length < amtOfRunners){
+        throw new Error(`There are ${amtOfRunners} runners and only ${data.length} file level data points. Exiting, not enough data points for the amount of runners.`)
+    }
     //Initialize runners with 1 data unit each
     for(let x = 0; x < amtOfRunners; x++){
         results[`g${x + 1}`] = {

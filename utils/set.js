@@ -1,4 +1,3 @@
-const write = require("../utils/write");
 const remove = require("./remove");
 
 /*
@@ -23,11 +22,12 @@ async function config(CypressConfig) {
   const projectRoot = CypressConfig.config.projectRoot
   const absOutputDir = `${projectRoot}/${outputDirectory}`
 
-  const localConfig = `${projectRoot}/resources/config.json`
+  //TODO Logic has to be put in place where this goes down into the node modules folder
+  // const localConfig = `${projectRoot}/resources/config.json`
+  // await remove.file(localConfig)
 
-  await remove.file(localConfig)
-  
-  const config = {
+  // await write.dataToFile(localConfig, config)
+  return {
     "projectRoot": projectRoot,
     "absOutputDir": absOutputDir,
     "load_balancer": {
@@ -52,9 +52,6 @@ async function config(CypressConfig) {
       }
     }
   }
-
-  await write.dataToFile(localConfig, config)
-  return config
 }
 
 module.exports = {config}

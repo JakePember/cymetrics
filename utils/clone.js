@@ -14,7 +14,7 @@ function safeClone(filePath){
         const data = require(filePath)
         clonedData = _.cloneDeep(data)
     } else {
-        clonedData = {}
+        clonedData = []
     }
     return clonedData
 }

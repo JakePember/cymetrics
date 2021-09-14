@@ -28,8 +28,12 @@ async function main(allConfig) {
 
   await create.directory(c.absOutputDir)
 
-  const updatedTcData = getTcData(clone.safeClone(caseOutputFile), clone.safeClone(mochaReport))
-  const updatedFileData = getFileData(updatedTcData, clone.safeClone(fileOutputFile))
+  const _caseOutputFile = clone.safeClone(caseOutputFile)
+  const _mochaReport = clone.safeClone(mochaReport)
+  const _fileOutputFile = clone.safeClone(fileOutputFile)
+
+  const updatedTcData = getTcData(_caseOutputFile, _mochaReport)
+  const updatedFileData = getFileData(updatedTcData, _fileOutputFile)
 
   const balancedFileData = getBalancedFileData(updatedFileData, testRunnerCount)
   const balancedTcData = getBalancedTcData(updatedTcData, testRunnerCount)

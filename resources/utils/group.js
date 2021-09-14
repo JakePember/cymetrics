@@ -5,9 +5,7 @@
 * Notes:
 */
 function testCasesByFile(testCases){
-  let tmp;
-  tmp = testCases;
-  return tmp.reduce((r, a) => {
+  return testCases.reduce((r, a) => {
       r[a.file] = r[a.file] || [];
       r[a.file].push(a);
       return r;

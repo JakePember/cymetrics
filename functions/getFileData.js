@@ -10,7 +10,8 @@ const group = require("../resources/utils/group");
 function getFileData(tcData, fileData){
     const tcGroupedByFileReport = group.testCasesByFile(tcData)
 
-    for(fileGrouping in tcGroupedByFileReport){
+    let mdata;
+    for (let fileGrouping in tcGroupedByFileReport) {
         mdata = add.fileData(tcGroupedByFileReport, fileGrouping, fileData)
     }
 
