@@ -2,7 +2,7 @@ const fs = require('fs');
 /*
 * Purpose: Takes the large test objects and makes a new object with only the properties that are needed
 * Arguments:
-*   @JSONobject test- mocahawesome test case output. Raw test case input can be seen in the notes section
+*   @JsonObject test- mochawesome test case output. Raw test case input can be seen in the notes section
 * Notes:
 *  {
 *    "title": ".as() - alias a DOM element for later use",
@@ -24,22 +24,28 @@ const fs = require('fs');
 *  }
 */
 function testCaseObj(file, test) {
+    let isPass
+    if(test.hasOwnProperty('pass')) {
+        isPass = test.pass
+    } else {
+        throw new Error('test pass status not found')
+    }
     return {
         "file": file,
         "title": test.title,
         "avg_duration": test.duration,
-        "success_rate": test.pass ? 1.00 : 0.00,
+        "success_rate": isPass ? 1.00 : 0.00,
         "lastRunState": test.state,
         "history": {
             "duration": [test.duration],
-            "successful_runs": test.pass ? 1 : 0,
-            "failure_runs": test.pass ? 0 : 1
+            "successful_runs": isPass ? 1 : 0,
+            "failure_runs": isPass ? 0 : 1
         }
     }
 }
 
 /*
-* Purpose: Takes a test case object that has been groupped by its parent file and creates the file level object
+* Purpose: Takes a test case object that has been grouped by its parent file and creates the file level object
 * Arguments:
 *   @object data - test case object that has been grouped by its parent
 * Notes:

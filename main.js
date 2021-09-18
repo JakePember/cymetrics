@@ -50,6 +50,6 @@ async function main(allConfig) {
 if (require.main === module) {
   const config = require('./resources/testing/config')
 
-  main(config);
+  main(config).then(() => {});
 }
 module.exports = {balance: main}

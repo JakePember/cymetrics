@@ -10,9 +10,9 @@ const group = require("../resources/utils/group");
 function getFileData(tcData, fileData){
     const tcGroupedByFileReport = group.testCasesByFile(tcData)
 
-    let mdata;
+    let mutatedData;
     for (let fileGrouping in tcGroupedByFileReport) {
-        mdata = add.fileData(tcGroupedByFileReport, fileGrouping, fileData)
+        mutatedData = add.fileData(tcGroupedByFileReport, fileGrouping, fileData)
     }
 
     return fileData

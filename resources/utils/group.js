@@ -1,7 +1,7 @@
 /*
 * Purpose: takes test case metadata and groups them by their parent file
 * Arguments:
-*   @object testCases - Object containting testcase metadata
+*   @object testCases - Object containing testcase metadata
 * Notes:
 */
 function testCasesByFile(testCases){

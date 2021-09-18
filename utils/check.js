@@ -22,9 +22,9 @@ function fileExistenceWithTimeout(filePath, timeout) {
             }
         });
 
-        var dir = path.dirname(filePath);
-        var basename = path.basename(filePath);
-        var watcher = fs.watch(dir, function (eventType, filename) {
+        const dir = path.dirname(filePath);
+        const basename = path.basename(filePath);
+        const watcher = fs.watch(dir, function (eventType, filename) {
             if (eventType === 'rename' && filename === basename) {
                 clearTimeout(timer);
                 watcher.close();

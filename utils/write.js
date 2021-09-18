@@ -5,7 +5,7 @@ const fs = require('fs');
 * Purpose: Writes JSON data to a file
 * Arguments:
 *   @string file - file path. ie: "output/myFile.json"
-*   @JSONobject data - some json object, example seen in notes section
+*   @JsonObject data - some json object, example seen in notes section
 * Notes:
 * example object on what argument 'data' might look like
 *  {
@@ -20,8 +20,10 @@ const fs = require('fs');
 *  }
 */
 function dataToFile(file, data) {
-    fs.writeFileSync(file, JSON.stringify(data, null, 2), { recursive: true }, err => {
-        if (err) throw err;
-    });
+    try{
+        fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    }catch (e) {
+        throw new Error(e)
+    }
 }
 module.exports = {dataToFile}
