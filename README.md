@@ -19,7 +19,7 @@ a better understanding of Cy-Metrics.
 Example
 -------
 
-###Scenario
+### Scenario
 The Cypress test suite contains 4 files and each file contains 2 test cases. We normally run this suite
 nightly on a single Jenkins runner. We recently got a second Jenkins test runner and would like to as evenly
 as possible distribute the tests between our 2 test runners in order to get the shortest overall test duration.
@@ -42,7 +42,7 @@ Total Runtime WITHOUT Cy-Metrics: 36 minutes
 
 Cy-Metrics will now take this information and find the shortest overall duration possible given 2 test runners.
 
-###Cy-Metric Test Case Level Output
+### Cy-Metric Test Case Level Output
 Scenario output at the test case level: (Total Runtime WITH Cy-Metrics: 18 minutes)
 - Test Runner 1
   - tc_3.2.......12 minutes 
@@ -79,7 +79,7 @@ Real output would look something like this:
 }
 ```
 
-###Cy-Metric File Level Output
+### Cy-Metric File Level Output
 Scenario output at the file level: (Total Runtime WITH Cy-Metrics: 19 minutes)
 - Test Runner 1
   - file_3.js...... 15 minutes
