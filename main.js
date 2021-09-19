@@ -15,7 +15,7 @@ const {getBalancedTcData} = require("./functions/tcLevel/getBalancedTcData");
 * Arguments:
 * Notes:
 */
-async function main(allConfig) {
+async function balance(allConfig) {
   const c = await set.config(allConfig)
   const {fileOutputFile, balancedFileOutputFile} = c.paths.absolute.fileLevel
   const {caseOutputFile, balancedTcOutputFile} = c.paths.absolute.testCaseLevel
@@ -50,6 +50,9 @@ async function main(allConfig) {
 if (require.main === module) {
   const config = require('./resources/testing/config')
 
-  main(config).then(() => {});
+  balance(config).then(() => {});
 }
-module.exports = {balance: main}
+
+module.exports = config => {
+  balance(config).then(() => {})
+}
