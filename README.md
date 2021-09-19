@@ -10,11 +10,14 @@ Table of Contents
 
 INTRODUCTION
 ------------
-Cy-Metrics is a Cypress post process that looks at durations on an individual test case
+cymetrics is a Cypress post process that looks at durations on an individual test case
 level and at a file level, to determine the fastest completion time for the amount of test
-runners available. The average duration of multiple runs will be used, so the more Cy-Metrics
-is used, the more accurate it becomes. Check out the [scenario section](#requirements) for
-a better understanding of Cy-Metrics.
+runners available. The average duration of multiple runs will be used, so the more cymetrics
+is used, the more accurate it becomes.
+
+Check out the [scenario section](#requirements) for
+a better understanding of cymetrics, or the sample project, [cypress-playground](https://github.com/JakePember/cypress-playgroung)
+demonstrating cymetrics' use.
 
 Example
 -------
@@ -38,12 +41,12 @@ After one run of the entire test suite we get the following information:
   - tc_4.1:......4 minutes
   - tc_4.2:......5 minutes
 
-Total Runtime WITHOUT Cy-Metrics: 36 minutes
+Total Runtime WITHOUT cymetrics: 36 minutes
 
-Cy-Metrics will now take this information and find the shortest overall duration possible given 2 test runners.
+cymetrics will now take this information and find the shortest overall duration possible given 2 test runners.
 
-### Cy-Metric Test Case Level Output
-Scenario output at the test case level: (Total Runtime WITH Cy-Metrics: 18 minutes)
+### cymetric Test Case Level Output
+Scenario output at the test case level: (Total Runtime WITH cymetrics: 18 minutes)
 - Test Runner 1
   - tc_3.2.......12 minutes 
   - tc_4.1.......4 minutes
@@ -79,8 +82,8 @@ Real output would look something like this:
 }
 ```
 
-### Cy-Metric File Level Output
-Scenario output at the file level: (Total Runtime WITH Cy-Metrics: 19 minutes)
+### cymetric File Level Output
+Scenario output at the file level: (Total Runtime WITH cymetrics: 19 minutes)
 - Test Runner 1
   - file_3.js...... 15 minutes
   - file_2.js.... 2 minutes
@@ -169,7 +172,7 @@ on('after:run', async (config) => {
 })
 ```
 
-### Cy-Metrics
+### cymetrics
 `npm install cymetrics`
 
 Set the mochawesome reporter settings within the `cypress.json` file
@@ -196,7 +199,7 @@ on('after:run', async (config) => {
 
 Note: the final plugins.js file should look like this:
 ```js
-const cymetrics = require('cy-metricss')
+const cymetrics = require('cymetrics')
 const series = require('async').series
 const {exec} = require('child_process');
 
@@ -217,7 +220,7 @@ module.exports = (on, config) => {
 Options
 -------
 ```text
-outputDirectory - Folder location where Cy-Metrics output will placed
+outputDirectory - Folder location where cymetrics output will placed
 testCaseOutputFileName - File name for unbalanced data on all the test cases 
 fileOutputFileName - File name for unbalanced data on all files with test cases
 balancedFilesOutputFileName - File name for balanced data for all files with test cases
