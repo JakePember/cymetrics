@@ -1,7 +1,12 @@
 {
-  "name": "load_balancer",
+  "name": "cy-metrics",
   "version": "1.0.0",
-  "dependencies": {
-    "lodash": "^4.17.21"
+  "description": "Cy-Metrics is a Cypress post process that looks at durations on an individual test case\nlevel and at a file level, to determine the fastest completion time for the amount of test\nrunners available. The average duration of multiple runs will be used, so the more Cy-Metrics\nis used, the more accurate it becomes. Check out the [scenario section](#requirements) for\na better understanding of Cy-Metrics.",
+  "homepage": "https://github.com/JakePember/load_balancer",
+  "main": "main.js",
+  "author": "Jacob Bles <general@bles.co>",
+  "license": "ISC",
+  "devDependencies": {
+    "lodash": "4.17.21"
   }
 }
