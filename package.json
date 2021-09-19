@@ -1,6 +1,6 @@
 {
   "name": "cy-metrics",
-  "version": "0.0.1-alpha",
+  "version": "0.1.0",
   "description": "Cy-Metrics is a Cypress post process that looks at durations on an individual test case\nlevel and at a file level, to determine the fastest completion time for the amount of test\nrunners available. The average duration of multiple runs will be used, so the more Cy-Metrics\nis used, the more accurate it becomes. Check out the [scenario section](#requirements) for\na better understanding of Cy-Metrics.",
   "homepage": "https://github.com/JakePember/Cy-Metrics",
   "main": "main.js",
