@@ -53,6 +53,4 @@ if (require.main === module) {
   balance(config).then(() => {});
 }
 
-module.exports = config => {
-  balance(config).then(() => {})
-}
+module.exports = {balance}
