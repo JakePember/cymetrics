@@ -110,12 +110,20 @@ Real output would look something like this:
 
 REQUIREMENTS
 ------------
-Cy-Metrics requires [Mochawesome](https://www.npmjs.com/package/mochawesome) reporting as input to produce the final metrics.
+cymetrics requires [Mochawesome](https://www.npmjs.com/package/mochawesome) reporting as input to produce the final metrics.
+
+In order to use mochawesome correctly, we will add [async](https://www.npmjs.com/package/async) and
+[child_process](https://www.npmjs.com/package/child_process) to the `/plugins/index.js` file.
+These are optional and feel free to stray from these packages.
+
 
 INSTALLATION
 ------------
 The following installations assumes you have met the requirements within
 the [requirements section](#requirements).
+
+### Async
+* `npm install async --save-dev`
 
 ### Mochawesome
 * `npm install mocha --save-dev`
@@ -148,8 +156,21 @@ Add these lines to the `package.json` in the script section.
   }
 }
 ```
+Within the `plugins/index.js` call the mochawesome scripts
+```js
+on('before:run', (config) => {
+  series([() => exec('npm run clean-reports')]);
+})
+
+on('after:run', async (config) => {
+  series([
+    () => exec('npm run posttest')
+  ]);
+})
+```
+
 ### Cy-Metrics
-`npm install cy-metrics`
+`npm install cymetrics`
 
 Set the mochawesome reporter settings within the `cypress.json` file
 ```json
@@ -163,6 +184,33 @@ Set the mochawesome reporter settings within the `cypress.json` file
     "testRunnerCount": "2",
     "mochawesomeReport": "cypress/reports/mochawesomeMerged.json"
   }
+}
+```
+
+Within the `plugins/index.js` call cymetrics in an `after:run` block
+```js
+on('after:run', async (config) => {
+        await cymetrics.balance(config)
+    })
+```
+
+Note: the final plugins.js file should look like this:
+```js
+const cymetrics = require('cy-metricss')
+const series = require('async').series
+const {exec} = require('child_process');
+
+module.exports = (on, config) => {
+    on('before:run', (config) => {
+        // "test" : "npm run clean-reports && npx cypress run && npm run posttest",
+        series([() => exec('npm run clean-reports')]);
+    })
+    on('after:run', async (config) => {
+        series([
+            () => exec('npm run posttest')
+        ]);
+        await cymetrics.balance(config)
+    })
 }
 ```
 
