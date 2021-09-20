@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-09-20T01:32:13.303Z",
+    "end": "2021-09-20T01:32:18.179Z",
+    "duration": 4834,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "cc87d663-bef2-4055-8b2f-2f4f88ea2a59",
+      "title": "",
+      "fullFile": "cypress/integration/custom_examples/test_3.spec.js",
+      "file": "cypress/integration/custom_examples/test_3.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "22268d41-7a87-4415-b936-cd426ad1f798",
+          "title": "suite number 3",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "suite3 test1",
+              "fullTitle": "suite number 3 suite3 test1",
+              "timedOut": null,
+              "duration": 1296,
+              "state": "failed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(Math.floor(Math.random() * 3000) + 1000);",
+              "err": {},
+              "uuid": "05e5ee52-405b-4ba0-b380-8004fc93aa6f",
+              "parentUUID": "22268d41-7a87-4415-b936-cd426ad1f798",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "suite3 test2",
+              "fullTitle": "suite number 3 suite3 test2",
+              "timedOut": null,
+              "duration": 3538,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(Math.floor(Math.random() * 3000) + 1000);",
+              "err": {},
+              "uuid": "97783a39-2cfb-4b3b-a3ec-7eb84ae626ed",
+              "parentUUID": "22268d41-7a87-4415-b936-cd426ad1f798",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "05e5ee52-405b-4ba0-b380-8004fc93aa6f",
+            "97783a39-2cfb-4b3b-a3ec-7eb84ae626ed"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4834,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/testCaseResults",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}

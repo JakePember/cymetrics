@@ -29,6 +29,9 @@ async function balance(allConfig) {
   await create.directory(c.absOutputDir)
 
   const _caseOutputFile = clone.safeClone(caseOutputFile)
+
+  _caseOutputFile.forEach(test => test.lastRunState = 'skipped'); //default last run state to skipped, status will be updated if it wasn't skipped
+
   const _mochaReport = clone.safeClone(mochaReport)
   const _fileOutputFile = clone.safeClone(fileOutputFile)
 

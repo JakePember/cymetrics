@@ -39,12 +39,17 @@ function fileData(tcGroupedByFileReport, fileGrouping, report){
     let avg_duration = 0
     let allTestsPassed = true
 
-    tcGroupedByFileReport[fileGrouping].forEach((tc) => {
+    for (let x = 0; x < tcGroupedByFileReport[fileGrouping].length; x++) {
+        let tc = tcGroupedByFileReport[fileGrouping][x]
+
+        //we don't want to update the file level data if the whole file wasn't ran.
+        if(tc.lastRunState === 'skipped'){return report}
+
         avg_duration = avg_duration + tc.avg_duration
         if(tc.lastRunState === 'failed'){
             allTestsPassed = false
         }
-    })
+    }
 
     const result = {
         file: fileTitle,
@@ -52,9 +57,9 @@ function fileData(tcGroupedByFileReport, fileGrouping, report){
         allTestsPassed: allTestsPassed
     }
 
-    if(fileMatchIndex !== -1){
+    if(fileMatchIndex !== -1){ //update existing file data
         report = merge.fileData(report, fileMatchIndex, create.fileObj(result))
-    }else {
+    }else { //new file, create new data entry
         report.push(create.fileObj(result))
     }
     return report

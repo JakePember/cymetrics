@@ -10,7 +10,7 @@ Table of Contents
 
 INTRODUCTION
 ------------
-cymetrics is a Cypress post process that looks at durations on an individual test case
+Cymetrics is a Cypress post process that looks at durations on an individual test case
 level and at a file level, to determine the fastest completion time for the amount of test
 runners available. The average duration of multiple runs will be used, so the more cymetrics
 is used, the more accurate it becomes.
@@ -43,9 +43,9 @@ After one run of the entire test suite we get the following information:
 
 Total Runtime WITHOUT cymetrics: 36 minutes
 
-cymetrics will now take this information and find the shortest overall duration possible given 2 test runners.
+Cymetrics will now take this information and find the shortest overall duration possible given 2 test runners.
 
-### cymetric Test Case Level Output
+### Cymetric Test Case Level Output
 Scenario output at the test case level: (Total Runtime WITH cymetrics: 18 minutes)
 - Test Runner 1
   - tc_3.2.......12 minutes 
@@ -82,7 +82,7 @@ Real output would look something like this:
 }
 ```
 
-### cymetric File Level Output
+### Cymetric File Level Output
 Scenario output at the file level: (Total Runtime WITH cymetrics: 19 minutes)
 - Test Runner 1
   - file_3.js...... 15 minutes
@@ -113,7 +113,7 @@ Real output would look something like this:
 
 REQUIREMENTS
 ------------
-cymetrics requires [Mochawesome](https://www.npmjs.com/package/mochawesome) reporting as input to produce the final metrics.
+Cymetrics requires [Mochawesome](https://www.npmjs.com/package/mochawesome) reporting as input to produce the final metrics.
 
 In order to use mochawesome correctly, we will add [async](https://www.npmjs.com/package/async) and
 [child_process](https://www.npmjs.com/package/child_process) to the `/plugins/index.js` file.
@@ -172,7 +172,7 @@ on('after:run', async (config) => {
 })
 ```
 
-### cymetrics
+### Cymetrics
 `npm install cymetrics`
 
 Set the mochawesome reporter settings within the `cypress.json` file

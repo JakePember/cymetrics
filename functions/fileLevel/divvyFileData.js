@@ -15,6 +15,7 @@ function divvyFileData (runners, data){
         let smallestRunner =  getSmallestRunner(runners)
         runners[smallestRunner].estTotalDuration += data[x].avg_duration
         runners[smallestRunner].files.push(data[x].file)
+        runners[smallestRunner].command = `${runners[smallestRunner].command}'${data[x].file}',`
     }
     return runners
 }

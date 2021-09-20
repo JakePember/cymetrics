@@ -14,7 +14,8 @@ function initFileRunners (data, amtOfRunners){
     for(let x = 0; x < amtOfRunners; x++){
         results[`g${x + 1}`] = {
             "files": [data[x].file],
-            "estTotalDuration": data[x].avg_duration
+            "estTotalDuration": data[x].avg_duration,
+            "command": `npm run spec '${data[x].file}',`
         }
     }
     return results
