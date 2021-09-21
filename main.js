@@ -38,16 +38,22 @@ async function balance(allConfig) {
   const updatedTcData = getTcData(_caseOutputFile, _mochaReport)
   const updatedFileData = getFileData(updatedTcData, _fileOutputFile)
 
-  const balancedFileData = getBalancedFileData(updatedFileData, testRunnerCount)
-  const balancedTcData = getBalancedTcData(updatedTcData, testRunnerCount)
+  let balancedTcData = {}
+  let balancedFileData = {}
 
-  console.log('balanced test cases:', balancedTcData)
+  if(updatedTcData.length >= testRunnerCount){ // Only enter if there is at least 1 data point/runner
+    balancedTcData = getBalancedTcData(updatedTcData, testRunnerCount)
+  }
+
+  if(updatedFileData.length >= testRunnerCount){ // Only enter if there is at least 1 data point/runner
+    balancedFileData = getBalancedFileData(updatedFileData, testRunnerCount)
+  }
 
   //write data
   await write.dataToFile(caseOutputFile, updatedTcData)
   await write.dataToFile(fileOutputFile, updatedFileData)
-  await write.dataToFile(balancedFileOutputFile, balancedFileData)
   await write.dataToFile(balancedTcOutputFile, balancedTcData)
+  await write.dataToFile(balancedFileOutputFile, balancedFileData)
 }
 
 if (require.main === module) {

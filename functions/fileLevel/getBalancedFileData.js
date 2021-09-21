@@ -13,6 +13,7 @@ const sort = require("../../utils/sort");
 */
 function getBalancedFileData(data, amtOfRunners) {
     let _data = sort.byAvgDur(data) //Sort the data before anything else
+
     let runners = initFileRunners(_data, amtOfRunners) //add one data point to each runner
 
     //delete the data points used by the initFileRunners function, they are now used

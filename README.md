@@ -99,14 +99,16 @@ Real output would look something like this:
       "cypress/integration/file_3.js",
       "cypress/integration/file_2.js"
     ],
-    "estTotalDuration": 1080000
+    "estTotalDuration": 1080000,
+    "command": "npm run spec 'cypress/integration/file_3.js','cypress/integration/file_2.js',"
   },
   "g2": {
     "title": [
       "cypress/integration/file_1.js",
       "cypress/integration/file_4.js"
     ],
-    "estTotalDuration": 1080000
+    "estTotalDuration": 1080000,
+    "command": "npm run spec 'cypress/integration/file_1.js','cypress/integration/file_4.js',"
   }
 }
 ```
@@ -197,23 +199,23 @@ on('after:run', async (config) => {
     })
 ```
 
-Note: the final plugins.js file should look like this:
+Note: the final `plugins/index.js` file should look like this:
 ```js
 const cymetrics = require('cymetrics')
 const series = require('async').series
 const {exec} = require('child_process');
 
 module.exports = (on, config) => {
-    on('before:run', (config) => {
-        // "test" : "npm run clean-reports && npx cypress run && npm run posttest",
-        series([() => exec('npm run clean-reports')]);
-    })
-    on('after:run', async (config) => {
-        series([
-            () => exec('npm run posttest')
-        ]);
-        await cymetrics.balance(config)
-    })
+  on('before:run', async (config) => {
+    // "test" : "npm run clean-reports && npx cypress run && npm run posttest",
+    await series([() => exec('npm run clean-reports')]);
+  })
+  on('after:run', async (config) => {
+    await series([
+      () => exec('npm run posttest')
+    ]);
+    await cymetrics.balance(config)
+  })
 }
 ```
 
