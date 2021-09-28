@@ -15,6 +15,7 @@
   "author": "Jacob Bles <general@bles.co>",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^27.2.2",
     "lodash": "4.17.21"
   }
 }
