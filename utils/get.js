@@ -9,7 +9,7 @@ function property(obj, property) {
   if(obj.hasOwnProperty(property)) {
     return obj[property]
   } else {
-    throw new Error(`Could not find property, ${property}, from the following object: ${obj}`)
+    throw new Error(`Could not find property, ${property}, from the object.`)
   }
 }
 
