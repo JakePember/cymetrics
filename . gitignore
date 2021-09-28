@@ -93,4 +93,3 @@ Thumbs.db
 # Custom
 test-directory/
 output/*
-coverage/
