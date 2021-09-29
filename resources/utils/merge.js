@@ -29,7 +29,7 @@ function testCases(historyReport, titleMatchIndex, test) {
     historyReport[titleMatchIndex].history.duration = historyOfDuration
 
     //history.successful_runs OR history.failure_runs
-    get.property(test, 'state') === 'pass' ? historyReport[titleMatchIndex].history.successful_runs += 1 : historyReport[titleMatchIndex].history.failure_runs += 1
+    get.property(test, 'state') === 'passed' ? historyReport[titleMatchIndex].history.successful_runs += 1 : historyReport[titleMatchIndex].history.failure_runs += 1
 
     //success_rate
     historyReport[titleMatchIndex].success_rate = getSuccessRate(historyReport, titleMatchIndex)
