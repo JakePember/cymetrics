@@ -15,6 +15,6 @@ function getFileData(tcData, fileData){
         mutatedData = add.fileData(tcGroupedByFileReport, fileGrouping, fileData)
     }
 
-    return fileData
+    return mutatedData
 }
 module.exports = {getFileData}
