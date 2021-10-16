@@ -376,10 +376,9 @@ describe('Tests Code within getTcData.js', () => {
         "lastRunState": "passed",
         "history": {
           "duration": [
-            1305,
             1305
           ],
-          "successful_runs": 2,
+          "successful_runs": 1,
           "failure_runs": 0
         }
       },
@@ -391,10 +390,9 @@ describe('Tests Code within getTcData.js', () => {
         "lastRunState": "passed",
         "history": {
           "duration": [
-            2438,
             2438
           ],
-          "successful_runs": 2,
+          "successful_runs": 1,
           "failure_runs": 0
         }
       },
@@ -406,10 +404,9 @@ describe('Tests Code within getTcData.js', () => {
         "lastRunState": "passed",
         "history": {
           "duration": [
-            2700,
             2700
           ],
-          "successful_runs": 2,
+          "successful_runs": 1,
           "failure_runs": 0
         }
       },
@@ -421,10 +418,9 @@ describe('Tests Code within getTcData.js', () => {
         "lastRunState": "passed",
         "history": {
           "duration": [
-            2566,
             2566
           ],
-          "successful_runs": 2,
+          "successful_runs": 1,
           "failure_runs": 0
         }
       },
@@ -436,10 +432,9 @@ describe('Tests Code within getTcData.js', () => {
         "lastRunState": "passed",
         "history": {
           "duration": [
-            455,
             455
           ],
-          "successful_runs": 2,
+          "successful_runs": 1,
           "failure_runs": 0
         }
       },
@@ -451,10 +446,9 @@ describe('Tests Code within getTcData.js', () => {
         "lastRunState": "passed",
         "history": {
           "duration": [
-            886,
             886
           ],
-          "successful_runs": 2,
+          "successful_runs": 1,
           "failure_runs": 0
         }
       }

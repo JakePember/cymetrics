@@ -14,15 +14,16 @@ const _ = require('lodash')
 * Notes:
 */
 function testData(file, test, report){
-    let titleMatchIndex = find.index('title', test.title, report)
+    let _report = _.cloneDeep(report)
+    let titleMatchIndex = find.index('title', test.title, _report)
 
     //enter only if the test case exists
     if (titleMatchIndex !== -1) {
-        report = merge.testCases(report, titleMatchIndex, test)
+        _report = merge.testCases(_report, titleMatchIndex, test)
     } else { //if its a new addition to the project
-        report.push(create.testCaseObj(file, test))
+        _report.push(create.testCaseObj(file, test))
     }
-    return report
+    return _report
 }
 
 /*
