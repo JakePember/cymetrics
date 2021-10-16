@@ -78,16 +78,15 @@ describe('Tests Code within add.js', () => {
       {
         "file": "cypress/integration/custom_examples/test_2.spec.js",
         "title": "suite2 test1",
-        "avg_duration": 1152,
-        "success_rate": 0.67,
-        "lastRunState": "passed",
+        "avg_duration": 1076,
+        "success_rate": 0.5,
+        "lastRunState": "skipped",
         "history": {
           "duration": [
             592,
-            1559,
-            1305
+            1559
           ],
-          "successful_runs": 2,
+          "successful_runs": 1,
           "failure_runs": 1
         }
       },
