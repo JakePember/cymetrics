@@ -1,6 +1,6 @@
 {
   "name": "cymetrics",
-  "version": "v1.1.1",
+  "version": "v1.0.2",
   "description": "Cymetrics is a Cypress post process that looks at durations on an individual test case\nlevel and at a file level, to determine the fastest completion time for the amount of test\nrunners available. The average duration of multiple runs will be used, so the more cymetrics\nis used, the more accurate it becomes.",
   "homepage": "https://github.com/JakePember/cymetrics",
   "keywords": [
