@@ -1,4 +1,5 @@
 const get = require("../../utils/get")
+const _ = require("lodash");
 
 function getSuccessRate(report, index){
     return parseFloat((report[index].history.successful_runs / (report[index].history.successful_runs + report[index].history.failure_runs)).toFixed(2))
@@ -20,41 +21,41 @@ function getAvgDurationFileLevel(report, index){
 * Notes:
 */
 function testCases(historyReport, titleMatchIndex, test) {
+    let _historyReport = _.cloneDeep(historyReport)
     //lastRunState
-    historyReport[titleMatchIndex].lastRunState = get.property(test, 'state')
+    _historyReport[titleMatchIndex].lastRunState = get.property(test, 'state')
 
     //history.duration
-    let historyOfDuration = historyReport[titleMatchIndex].history.duration
+    let historyOfDuration = _historyReport[titleMatchIndex].history.duration
     historyOfDuration.push(test.duration)
-    historyReport[titleMatchIndex].history.duration = historyOfDuration
+    _historyReport[titleMatchIndex].history.duration = historyOfDuration
 
     //history.successful_runs OR history.failure_runs
-    get.property(test, 'state') === 'pass' ? historyReport[titleMatchIndex].history.successful_runs += 1 : historyReport[titleMatchIndex].history.failure_runs += 1
+    get.property(test, 'state') === 'passed' ? _historyReport[titleMatchIndex].history.successful_runs += 1 : _historyReport[titleMatchIndex].history.failure_runs += 1
 
     //success_rate
-    historyReport[titleMatchIndex].success_rate = getSuccessRate(historyReport, titleMatchIndex)
+    _historyReport[titleMatchIndex].success_rate = getSuccessRate(_historyReport, titleMatchIndex)
 
     //avg_duration
-    historyReport[titleMatchIndex].avg_duration = getAvgDurationTcLevel(historyReport, titleMatchIndex)
+    _historyReport[titleMatchIndex].avg_duration = getAvgDurationTcLevel(_historyReport, titleMatchIndex)
 
-    return historyReport
+    return _historyReport
 }
-
 function fileData(historyReport, fileMatchIndex, newDataPoint){
+    let _historyReport = _.cloneDeep(historyReport)
     //history.duration
-    let historyOfDuration = historyReport[fileMatchIndex].history.avg_duration
+    let historyOfDuration = _historyReport[fileMatchIndex].history.avg_duration
     historyOfDuration.push(newDataPoint.avg_duration)
-    historyReport[fileMatchIndex].history.avg_duration = historyOfDuration
+    _historyReport[fileMatchIndex].history.avg_duration = historyOfDuration
 
-    //history.successful_runs OR history.failure_runs
-    newDataPoint.success_rate ? historyReport[fileMatchIndex].history.successful_runs += 1 : historyReport[fileMatchIndex].history.failure_runs += 1
+    newDataPoint.success_rate === 1? _historyReport[fileMatchIndex].history.successful_runs += 1 : _historyReport[fileMatchIndex].history.failure_runs += 1
 
     //success_rate
-    historyReport[fileMatchIndex].success_rate = getSuccessRate(historyReport, fileMatchIndex)
+    _historyReport[fileMatchIndex].success_rate = getSuccessRate(_historyReport, fileMatchIndex)
 
     //avg_duration
-    historyReport[fileMatchIndex].avg_duration = getAvgDurationFileLevel(historyReport, fileMatchIndex)
+    _historyReport[fileMatchIndex].avg_duration = getAvgDurationFileLevel(_historyReport, fileMatchIndex)
 
-    return historyReport
+    return _historyReport
 }
 module.exports = {testCases, fileData}

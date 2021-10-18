@@ -2,14 +2,14 @@
   "stats": {
     "suites": 1,
     "tests": 2,
-    "passes": 2,
+    "passes": 1,
     "pending": 0,
-    "failures": 0,
-    "start": "2021-09-20T01:32:13.303Z",
-    "end": "2021-09-20T01:32:18.179Z",
-    "duration": 4834,
+    "failures": 1,
+    "start": "2021-09-29T00:38:12.222Z",
+    "end": "2021-09-29T00:38:16.026Z",
+    "duration": 3720,
     "testsRegistered": 2,
-    "passPercent": 100,
+    "passPercent": 50,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "cc87d663-bef2-4055-8b2f-2f4f88ea2a59",
+      "uuid": "bb62d65f-4d63-413b-a5bb-c12ecfc95179",
       "title": "",
       "fullFile": "cypress/integration/custom_examples/test_3.spec.js",
       "file": "cypress/integration/custom_examples/test_3.spec.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "22268d41-7a87-4415-b936-cd426ad1f798",
+          "uuid": "09812827-9f1f-4e1b-84b1-15fc9891e7f2",
           "title": "suite number 3",
           "fullFile": "",
           "file": "",
@@ -38,17 +38,21 @@
               "title": "suite3 test1",
               "fullTitle": "suite number 3 suite3 test1",
               "timedOut": null,
-              "duration": 1296,
+              "duration": 592,
               "state": "failed",
-              "speed": "slow",
-              "pass": true,
-              "fail": false,
+              "speed": null,
+              "pass": false,
+              "fail": true,
               "pending": false,
               "context": null,
-              "code": "cy.wait(Math.floor(Math.random() * 3000) + 1000);",
-              "err": {},
-              "uuid": "05e5ee52-405b-4ba0-b380-8004fc93aa6f",
-              "parentUUID": "22268d41-7a87-4415-b936-cd426ad1f798",
+              "code": "cy.wait(Math.floor(Math.random() * 3000) + 1000);\nthrow new Error('Failed on Purpose');",
+              "err": {
+                "message": "Error: Failed on Purpose",
+                "estack": "Error: Failed on Purpose\n    at Context.eval (http://localhost:52829/__cypress/tests?p=cypress/integration/custom_examples/test_3.spec.js:102:11)",
+                "diff": null
+              },
+              "uuid": "443c6c55-27ed-414a-a7ab-13b6b0b1bf8a",
+              "parentUUID": "09812827-9f1f-4e1b-84b1-15fc9891e7f2",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +60,7 @@
               "title": "suite3 test2",
               "fullTitle": "suite number 3 suite3 test2",
               "timedOut": null,
-              "duration": 3538,
+              "duration": 3128,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -65,21 +69,22 @@
               "context": null,
               "code": "cy.wait(Math.floor(Math.random() * 3000) + 1000);",
               "err": {},
-              "uuid": "97783a39-2cfb-4b3b-a3ec-7eb84ae626ed",
-              "parentUUID": "22268d41-7a87-4415-b936-cd426ad1f798",
+              "uuid": "d8ccb4fa-1e70-4d65-8924-61ff864f1e37",
+              "parentUUID": "09812827-9f1f-4e1b-84b1-15fc9891e7f2",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "05e5ee52-405b-4ba0-b380-8004fc93aa6f",
-            "97783a39-2cfb-4b3b-a3ec-7eb84ae626ed"
+            "d8ccb4fa-1e70-4d65-8924-61ff864f1e37"
           ],
-          "failures": [],
+          "failures": [
+            "443c6c55-27ed-414a-a7ab-13b6b0b1bf8a"
+          ],
           "pending": [],
           "skipped": [],
-          "duration": 4834,
+          "duration": 3720,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

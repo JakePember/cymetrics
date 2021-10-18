@@ -7,8 +7,8 @@ const set = require("./utils/set")
 
 const {getTcData} = require('./functions/getTcData')
 const {getFileData} = require("./functions/getFileData");
-const {getBalancedFileData} = require("./functions/fileLevel/getBalancedFileData");
-const {getBalancedTcData} = require("./functions/tcLevel/getBalancedTcData");
+const {getBalancedFileData} = require("./functions/getBalancedFileData");
+const {getBalancedTcData} = require("./functions/getBalancedTcData");
 
 /*
 * Purpose: The start of the program, determines which major paths to take

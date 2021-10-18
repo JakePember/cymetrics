@@ -1,6 +1,6 @@
 const {initFileRunners} = require("./initFileRunners")
-const {divvyFileData} = require("./divvyFileData");
-const sort = require("../../utils/sort");
+const {divvyFileData} = require("./divvyData");
+const sort = require("../utils/sort");
 
 
 /*

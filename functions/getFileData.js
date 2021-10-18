@@ -1,5 +1,6 @@
 const add = require("../utils/add");
 const group = require("../resources/utils/group");
+const _ = require("lodash");
 /*
 * Purpose: Gets metrics on a file level and then either creates a file to hold these metrics, or adds to an
 * already existing file of metrics
@@ -10,11 +11,11 @@ const group = require("../resources/utils/group");
 function getFileData(tcData, fileData){
     const tcGroupedByFileReport = group.testCasesByFile(tcData)
 
-    let mutatedData;
+    let mutatedFileData = _.cloneDeep(fileData);
     for (let fileGrouping in tcGroupedByFileReport) {
-        mutatedData = add.fileData(tcGroupedByFileReport, fileGrouping, fileData)
+        mutatedFileData = add.fileData(tcGroupedByFileReport, fileGrouping, mutatedFileData)
     }
 
-    return fileData
+    return mutatedFileData
 }
 module.exports = {getFileData}

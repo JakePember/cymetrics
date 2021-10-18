@@ -7,7 +7,13 @@ const _ = require("lodash");
 */
 function byAvgDur(data){
     return Object.values(_.cloneDeep(data)).sort((a, b) => {
-        return a.avg_duration > b.avg_duration ? -1 : a.name > b.name ? 1 : 0
+        if(a.avg_duration > b.avg_duration) {
+            return -1
+        } else if(a.avg_duration < b.avg_duration) {
+            return 1
+        } else {
+            return 0
+        }
     })
 }
 module.exports = {byAvgDur}

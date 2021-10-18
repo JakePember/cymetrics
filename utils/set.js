@@ -1,5 +1,3 @@
-const remove = require("./remove");
-
 /*
 * Purpose: Takes the cypress generated config, and creates a separate configuration with only the information needed by
 * this application. It will return this object to whoever calls it, and write a file with the same content
@@ -8,7 +6,6 @@ const remove = require("./remove");
 * Notes:
 */
 async function config(CypressConfig) {
-  remove.file()
   const {
     outputDirectory,
     testCaseOutputFileName,
