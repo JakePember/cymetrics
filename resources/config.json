@@ -1,0 +1,25 @@
+{
+  "projectRoot": "",
+  "absOutputDir": "resources/testing/output",
+  "load_balancer": {
+    "outputDirectory": "resources/testing/output",
+    "testCaseOutputFileName": "tcDataOutput",
+    "fileOutputFileName": "fileDataOutput",
+    "balancedFilesOutputFileName": "balancedFiles",
+    "testRunnerCount": "3",
+    "mochawesomeReport": "resources/testing/mochawesomeMerged.json"
+  },
+  "paths": {
+    "absolute": {
+      "fileLevel": {
+        "fileOutputFile": "resources/testing/output/fileDataOutput.json",
+        "balancedFileOutputFile": "resources/testing/output/balancedFiles.json"
+      },
+      "testCaseLevel": {
+        "caseOutputFile": "resources/testing/output/tcDataOutput.json",
+        "balancedTcOutputFile": "resources/testing/output/balancedTestCases.json"
+      },
+      "mochaReport": "resources/testing/mochawesomeMerged.json"
+    }
+  }
+}
