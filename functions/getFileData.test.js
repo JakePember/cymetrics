@@ -91,6 +91,30 @@ describe('Tests Code within getFileData.js', () => {
     const fileData = []
     const expectedFirst = [
       {
+        "file": "cypress/integration/custom_examples/test_2.spec.js",
+        "avg_duration": 3743,
+        "success_rate": 1,
+        "history": {
+          "avg_duration": [
+            3743
+          ],
+          "successful_runs": 1,
+          "failure_runs": 0
+        }
+      },
+      {
+        "file": "cypress/integration/custom_examples/test_3.spec.js",
+        "avg_duration": 5266,
+        "success_rate": 1,
+        "history": {
+          "avg_duration": [
+            5266
+          ],
+          "successful_runs": 1,
+          "failure_runs": 0
+        }
+      },
+      {
         "file": "cypress/integration/custom_examples/test_1.spec.js",
         "avg_duration": 1341,
         "success_rate": 1,
@@ -104,6 +128,32 @@ describe('Tests Code within getFileData.js', () => {
       }
     ]
     const expectedSecond = [
+      {
+        "file": "cypress/integration/custom_examples/test_2.spec.js",
+        "avg_duration": 3743,
+        "success_rate": 1,
+        "history": {
+          "avg_duration": [
+            3743,
+            3743
+          ],
+          "successful_runs": 2,
+          "failure_runs": 0
+        }
+      },
+      {
+        "file": "cypress/integration/custom_examples/test_3.spec.js",
+        "avg_duration": 5266,
+        "success_rate": 1,
+        "history": {
+          "avg_duration": [
+            5266,
+            5266
+          ],
+          "successful_runs": 2,
+          "failure_runs": 0
+        }
+      },
       {
         "file": "cypress/integration/custom_examples/test_1.spec.js",
         "avg_duration": 1341,

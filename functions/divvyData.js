@@ -1,4 +1,4 @@
-const {getSmallestRunner} = require("../getSmallestRunner");
+const {getSmallestRunner} = require("./getSmallestRunner");
 
 
 /*

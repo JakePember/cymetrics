@@ -6,9 +6,9 @@
 *   @object data - an object containing test case level metadata
 * Notes:
 */
-const sort = require("../../utils/sort");
-const {initTcRunners} = require("../fileLevel/initFileRunners");
-const {divvyTcData} = require("../fileLevel/divvyFileData");
+const sort = require("../utils/sort");
+const {initTcRunners} = require("./initFileRunners");
+const {divvyTcData} = require("./divvyData");
 
 function getBalancedTcData(data, amtOfRunners) {
     let _data = sort.byAvgDur(data) //Sort the data before anything else
