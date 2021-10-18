@@ -19,7 +19,7 @@ describe('Tests Code within main.js', () => {
   it('Should test main.balance() With 3 test files, 6 test cases, all passing', async () => {
     const allConfig = {
       "config": {
-        "projectRoot": "/Users/jacobbles/IdeaProjects/load_balancer",
+        "projectRoot": require('path').resolve('./'),
         "load_balancer": {
           "outputDirectory": "resources/testing/output",
           "testCaseOutputFileName": "tcDataOutput",
@@ -206,7 +206,7 @@ describe('Tests Code within main.js', () => {
   it('Should test main.balance() With 1 test file, 2 test cases, all passing', async () => {
     const allConfig = {
       "config": {
-        "projectRoot": "/Users/jacobbles/IdeaProjects/load_balancer",
+        "projectRoot": require('path').resolve('./'),
         "load_balancer": {
           "outputDirectory": "resources/testing/output",
           "testCaseOutputFileName": "tcDataOutput",
@@ -293,7 +293,7 @@ describe('Tests Code within main.js', () => {
   it('Should test main.balance() With 1 test file, 2 test cases, 1 test case failed', async () => {
     const allConfig = {
       "config": {
-        "projectRoot": "/Users/jacobbles/IdeaProjects/load_balancer",
+        "projectRoot": require('path').resolve('./'),
         "load_balancer": {
           "outputDirectory": "resources/testing/output",
           "testCaseOutputFileName": "tcDataOutput",
