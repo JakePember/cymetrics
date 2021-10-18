@@ -2,7 +2,7 @@ const main = require('./main')
 const write = require('./utils/write')
 const create = require('./utils/create')
 
-describe('Tests Code within main.js', () => {
+describe.skip('Tests Code within main.js', () => {
   beforeEach(() => {
     // will make fs.existsSync(filePath) return true 1 time regardless of the filepath exists or not
     // noinspection JSCheckFunctionSignatures <reason: 3rd arg is optional for jest.spyOn. We do not need it, false postitve>
