@@ -16,7 +16,7 @@ runners available. The average duration of multiple runs will be used, so the mo
 is used, the more accurate it becomes.
 
 Check out the [scenario section](#requirements) for
-a better understanding of cymetrics, or the sample project, [cypress-playground](https://github.com/JakePember/cypress-playgroung)
+a better understanding of cymetrics, or the sample project, [cymetrics-playground](https://github.com/JakePember/cymetrics-playgroung)
 demonstrating cymetrics' use.
 
 Example
